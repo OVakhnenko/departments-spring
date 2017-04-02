@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class DepartmentsController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String printDepartments(ModelMap model) {
+    public String AddDepartment(ModelMap model) {
         model.addAttribute("message", "Add Department");
         return "departments";
     }
