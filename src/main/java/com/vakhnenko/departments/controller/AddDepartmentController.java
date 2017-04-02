@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/departments")
-public class MainController {
+@RequestMapping("/departments/add")
+public class AddDepartmentController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String printWelcome(ModelMap model) {
+    public String printDepartments(ModelMap model) {
         model.addAttribute("message", "Hello Departments");
         return "departments";
     }
