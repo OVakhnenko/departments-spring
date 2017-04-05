@@ -23,14 +23,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-
-    <!-- CSS class for validation errors -->
-    <style>
-        .error {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
 </head>
 
 <body>
@@ -73,7 +65,7 @@
                 <label for="nameInput">Name: </label>
                 <form:input path="name" id="nameInput"></form:input>
             </td>
-            <td><form:errors path="name" cssclass="error"></form:errors></td>
+            <td><form:errors path="name" cssStyle="color: #ff0000;" element="div"></form:errors></td>
         </tr>
         <tr>
             <td>

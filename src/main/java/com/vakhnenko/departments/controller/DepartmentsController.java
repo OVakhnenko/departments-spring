@@ -17,24 +17,28 @@ import java.util.Map;
 @RequestMapping("/")
 public class DepartmentsController {
 
-    @RequestMapping(value = "/departments/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/department/add", method = RequestMethod.POST)
     public String addDepartment(@Valid @ModelAttribute("department") Department department,
                           BindingResult result, Map<String, Object> model) {
 
         if (result.hasErrors()) {
             return "departments";
+        } else {
+            //List<Department> listDepartments = model.get("listDepartments");
+            //model.get .addAttribute("listDepartments", listDepartments);
+
+            return "redirect:/departments";
         }
-        return "redirect:/departments";
     }
 
     @RequestMapping(value = "/demonstration", method = RequestMethod.POST)
     public String Demonstration(ModelMap model) {
-        List<Department> list = new ArrayList();
-        list.add(new Department("Department 1"));
-        list.add(new Department("Department 2"));
-        list.add(new Department("Department 3"));
-        list.add(new Department("Department 4"));
-        model.addAttribute("listDepartments", list);
+        List<Department> listDepartments = new ArrayList();
+        listDepartments.add(new Department("Department 1"));
+        listDepartments.add(new Department("Department 2"));
+        listDepartments.add(new Department("Department 3"));
+        listDepartments.add(new Department("Department 4"));
+        model.addAttribute("listDepartments", listDepartments);
         model.addAttribute("department", new Department());
         return "departments";
     }
