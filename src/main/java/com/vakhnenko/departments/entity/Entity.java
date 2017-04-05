@@ -1,8 +1,12 @@
 package com.vakhnenko.departments.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public abstract class Entity {
-    private int ID;
+
+    @NotEmpty
     private String name;
+    private int ID;
 
     public Entity() {
     }
