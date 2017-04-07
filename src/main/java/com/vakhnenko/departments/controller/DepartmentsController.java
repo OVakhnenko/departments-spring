@@ -1,6 +1,9 @@
 package com.vakhnenko.departments.controller;
 
 import com.vakhnenko.departments.entity.Department;
+import com.vakhnenko.departments.service.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,6 +19,13 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class DepartmentsController {
+    private DepartmentService departmentService;
+
+    @Autowired(required = true)
+    @Qualifier(value = "departmentService")
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
 
     @RequestMapping(value = "/department/add", method = RequestMethod.POST)
     public String addDepartment(@Valid @ModelAttribute("department") Department department,
@@ -24,9 +34,7 @@ public class DepartmentsController {
         if (result.hasErrors()) {
             return "departments";
         } else {
-            //List<Department> listDepartments = model.get("listDepartments");
-            //model.get .addAttribute("listDepartments", listDepartments);
-
+            this.departmentService.addDepartment(department);
             return "redirect:/departments";
         }
     }
