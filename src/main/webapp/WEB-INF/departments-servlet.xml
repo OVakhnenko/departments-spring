@@ -50,7 +50,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.vakhnenko.departments.entity.Department</value>
-                <!--<value>com.vakhnenko.departments.entity.Employee</value>-->
+                <value>com.vakhnenko.departments.entity.Employee</value>
             </list>
         </property>
 
@@ -67,9 +67,19 @@
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
 
+    <!--EmployeeDao bean-->
+    <bean id="employeeDao" class="com.vakhnenko.departments.dao.EmployeeDao">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
     <!--DepartmentService bean-->
     <bean id="departmentService" class="com.vakhnenko.departments.service.DepartmentService">
         <property name="departmentDao" ref="departmentDao"/>
+    </bean>
+
+    <!--EmployeeService bean-->
+    <bean id="employeeService" class="com.vakhnenko.departments.service.EmployeeService">
+        <property name="employeeDao" ref="employeeDao"/>
     </bean>
 
     <!-- Transaction -->
