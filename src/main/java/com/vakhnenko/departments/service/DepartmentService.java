@@ -6,9 +6,8 @@ import com.vakhnenko.departments.entity.Department;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service("departmentService")
-public class DepartmentService implements Servize {
+public class DepartmentService implements Servize<Department> {
     private DepartmentDao departmentDao;
 
     public void setDepartmentDao(DepartmentDao departmentDao) {
@@ -17,7 +16,7 @@ public class DepartmentService implements Servize {
 
     @Override
     @Transactional
-    public void addDepartment(Department department) {
+    public void add(Department department) {
         this.departmentDao.add(department);
     }
 }

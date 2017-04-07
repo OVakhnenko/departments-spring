@@ -1,9 +1,7 @@
 package com.vakhnenko.departments.dao;
 
-import com.vakhnenko.departments.entity.Department;
+import com.vakhnenko.departments.entity.Essence;
 
-import java.util.List;
-
-public interface Dao {
-    public void add(Department department);
+public interface Dao<T extends Essence> {
+    void add(T o);
 }

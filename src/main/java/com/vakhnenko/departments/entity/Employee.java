@@ -18,7 +18,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "employee", catalog = "departments", uniqueConstraints = {
         @UniqueConstraint(columnNames = "name")})
-public class Employee implements java.io.Serializable {
+public class Employee implements Essence, java.io.Serializable {
 
     private int employee_id;
     @NotEmpty

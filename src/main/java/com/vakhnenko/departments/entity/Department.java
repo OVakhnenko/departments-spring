@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -21,7 +20,7 @@ import java.util.Set;
 @Entity
 @Table(name = "department", catalog = "departments", uniqueConstraints = {
         @UniqueConstraint(columnNames = "name")})
-public class Department implements java.io.Serializable {
+public class Department implements Essence, java.io.Serializable {
 
     private int department_id;
     @NotEmpty

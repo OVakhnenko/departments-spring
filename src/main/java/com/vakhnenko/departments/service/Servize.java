@@ -1,7 +1,7 @@
 package com.vakhnenko.departments.service;
 
-import com.vakhnenko.departments.entity.Department;
+import com.vakhnenko.departments.entity.Essence;
 
-public interface Servize {
-    public void addDepartment(Department department);
+public interface Servize<T extends Essence> {
+    void add(T o);
 }
