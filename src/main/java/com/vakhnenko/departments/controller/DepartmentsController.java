@@ -1,6 +1,6 @@
 package com.vakhnenko.departments.controller;
 
-import com.vakhnenko.departments.entity.department.Department;
+import com.vakhnenko.departments.entity.Department;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -57,5 +57,4 @@ public class DepartmentsController {
         model.addAttribute("department", new Department());
         return "departments";
     }
-
 }
