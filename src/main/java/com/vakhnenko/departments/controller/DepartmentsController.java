@@ -2,6 +2,7 @@ package com.vakhnenko.departments.controller;
 
 import com.vakhnenko.departments.entity.Department;
 import com.vakhnenko.departments.service.DepartmentService;
+import com.vakhnenko.departments.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.Map;
 @RequestMapping("/")
 public class DepartmentsController {
     private DepartmentService departmentService;
+    private EmployeeService employeeService;
 
     @Autowired(required = true)
     @Qualifier(value = "departmentService")
@@ -34,7 +36,7 @@ public class DepartmentsController {
         if (result.hasErrors()) {
             return "departments";
         } else {
-            this.departmentService.addDepartment(department);
+            this.departmentService.add(department);
             return "redirect:/departments";
         }
     }
