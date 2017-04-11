@@ -23,14 +23,14 @@ public class DepartmentsController {
     private DepartmentService departmentService;
     private EmployeeService employeeService;
 
-    //@Autowired(required = true)
-    //@Qualifier(value = "departmentService")
+    @Autowired(required = true)
+    @Qualifier(value = "departmentService")
     public void setDepartmentService(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 
-    //@Autowired(required = true)
-    //@Qualifier(value = "employeeService")
+    @Autowired(required = true)
+    @Qualifier(value = "employeeService")
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
