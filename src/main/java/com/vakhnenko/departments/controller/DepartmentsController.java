@@ -20,20 +20,13 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class DepartmentsController {
+
+    @Autowired
+    @Qualifier("departmentService")
     private DepartmentService departmentService;
+
+    @Autowired
     private EmployeeService employeeService;
-
-    @Autowired(required = true)
-    @Qualifier(value = "departmentService")
-    public void setDepartmentService(DepartmentService departmentService) {
-        this.departmentService = departmentService;
-    }
-
-    @Autowired(required = true)
-    @Qualifier(value = "employeeService")
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
 
     @RequestMapping(value = "/department/add", method = RequestMethod.POST)
     public String addDepartment(@Valid @ModelAttribute("department") Department department,
@@ -49,7 +42,7 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/demonstration", method = RequestMethod.POST)
     public String Demonstration(ModelMap model) {
-        List<Department> listDepartments = new ArrayList();
+        List<Department> listDepartments = new ArrayList<>();
         listDepartments.add(new Department("Department 1"));
         listDepartments.add(new Department("Department 2"));
         listDepartments.add(new Department("Department 3"));

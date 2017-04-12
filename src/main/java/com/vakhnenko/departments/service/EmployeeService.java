@@ -7,17 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("employeeService")
-public class EmployeeService implements Servize<Employee> {
+@Service
+public class EmployeeService {
+    @Autowired
     private EmployeeDao employeeDao;
 
-    public void setEmployeeDao(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
-    }
-
-    @Override
-    @Transactional
-    public void add(Employee employee) {
-        this.employeeDao.add(employee);
-    }
 }

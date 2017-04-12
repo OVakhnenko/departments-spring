@@ -16,14 +16,14 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "employee", catalog = "departments", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "name")})
+@Table(name = "employee", catalog = "departments", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class Employee implements Essence, java.io.Serializable {
 
     private int employee_id;
+    private int age;
+
     @NotEmpty
     private String name;
-    private int age;
     private String type;
     private String language;
     private String methodology;
