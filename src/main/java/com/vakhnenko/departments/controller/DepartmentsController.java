@@ -28,6 +28,10 @@ public class DepartmentsController {
     @Autowired
     private EmployeeService employeeService;
 
+    DepartmentsController() {
+
+    }
+
     @RequestMapping(value = "/department/add", method = RequestMethod.POST)
     public String addDepartment(@Valid @ModelAttribute("department") Department department,
                           BindingResult result, Map<String, Object> model) {

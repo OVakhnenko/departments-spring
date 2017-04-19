@@ -22,9 +22,9 @@ public abstract class ConnectionUtilHibernate {
 
     private static void makeSessionFactory() {
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+            sessionFactory = new Configuration().configure().buildSessionFactory(); // в 5-м Hibernate запилили обратно
         } catch (Exception e) {
-            logger.error("Hibernate create session factory error! Connection is not established", e);
+            logger.error("DEPSPRERR: Hibernate create session factory error! Connection is not established", e);
         }
     }
 
@@ -39,7 +39,7 @@ public abstract class ConnectionUtilHibernate {
         try {
             session = sessionFactory.openSession();
         } catch (Exception e) {
-            logger.error("Hibernate open session error! Connection is not established", e);
+            logger.error("DEPSPRERR: Hibernate open session error! Connection is not established", e);
             return false;
         }
         try {
@@ -59,7 +59,7 @@ public abstract class ConnectionUtilHibernate {
     private static void createDBIfNotExists() {
         if (!(createHibernateDB(CREATE_DB_DEPARTMENT_IF_NOT_EXISTS, DEPARTMENT_TABLE_NAME, "Department")) ||
                 (!createHibernateDB(CREATE_DB_EMPLOYEE_IF_NOT_EXISTS, EMPLOYEE_TABLE_NAME, "Employee"))) {
-            logger.error("Hibernate error! Tables not created!");
+            logger.error("DEPSPRERR: Hibernate error! Tables not created!");
             System.exit(DB_CREATE_ERROR_EXIT_CODE);
         }
     }
