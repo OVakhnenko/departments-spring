@@ -12,10 +12,10 @@ import java.util.List;
 import static com.vakhnenko.departments.utils.Constants.*;
 
 public abstract class ConnectionUtilHibernate {
-    private static SessionFactory sessionFactory;
+    //private static SessionFactory sessionFactory;
     private static final Logger logger = LoggerFactory.getLogger(ConnectionUtilHibernate.class);
 
-    static {
+    /*static {
         makeSessionFactory();
         createDBIfNotExists();
     }
@@ -62,5 +62,5 @@ public abstract class ConnectionUtilHibernate {
             logger.error("DEPSPRERR: Hibernate error! Tables not created!");
             System.exit(DB_CREATE_ERROR_EXIT_CODE);
         }
-    }
+    }*/
 }
