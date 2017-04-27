@@ -42,7 +42,7 @@ public class DepartmentsController {
         if (result.hasErrors()) {
             return "departments";
         } else {
-            this.departmentService.add(department);
+            this.departmentService.save(department);
             return "redirect:/departments";
         }
     }

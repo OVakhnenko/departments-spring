@@ -13,7 +13,7 @@ public class DepartmentService {
     @Autowired
     private DepartmentDao departmentDao;
 
-    public void add(Department department) {
+    public void save(Department department) {
         departmentDao.save(department);
     }
 
