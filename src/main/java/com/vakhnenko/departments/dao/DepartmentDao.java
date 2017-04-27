@@ -19,6 +19,7 @@ public class DepartmentDao implements Dao<Department> {
     public void save(Department department) {
         Session session = sessionFactory.openSession();
         session.persist(department);
+        session.flush();
         session.close();
         logger.info("Department successfully saved. Department name: " + department.getName());
 
