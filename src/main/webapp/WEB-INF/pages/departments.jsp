@@ -46,9 +46,9 @@
         <c:forEach items="${listDepartments}" var="department">
             <tr>
                 <td><a href="/department/${department.getDepartment_id()}">${department.getName()}</a></td>
-                <td><a href="<c:url value='/edit/${department.getDepartment_id()}'/>"><span
+                <td><a href="<c:url value='/department/edit/${department.getDepartment_id()}'/>"><span
                         class="glyphicon glyphicon-edit"></span></a></td>
-                <td><a href="<c:url value='/remove/${department.getDepartment_id()}'/>"><span
+                <td><a href="<c:url value='/department/remove/${department.getDepartment_id()}'/>"><span
                         class="glyphicon glyphicon-remove-sign"></span></a></td>
             </tr>
         </c:forEach>

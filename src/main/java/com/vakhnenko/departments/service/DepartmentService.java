@@ -17,6 +17,10 @@ public class DepartmentService {
         departmentDao.save(department);
     }
 
+    public void remove(int id) {
+        departmentDao.remove(id);
+    }
+
     public List<Department> list() {
         return departmentDao.list();
     }

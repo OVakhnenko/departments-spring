@@ -36,6 +36,34 @@ public class DepartmentDao implements Dao<Department> {
         logger.info("Department successfully saved. Department name: " + department.getName());
     }
 
+    @Override
+    public void remove(int id) {
+        Session session = this.sessionFactory.openSession();
+        Department department = (Department) session.load(Department.class, new Integer(id));
+
+        if (department != null) {
+            session.delete(department);
+            logger.info("Department successfully deleted. Department details: " + department);
+        } else {
+            logger.info("Department not found!");
+        }
+    }
+
+    @Override
+    public Department getEssenceById(int id) {
+        Session session = this.sessionFactory.openSession();
+        Department department = (Department) session.load(Department.class, new Integer(id));
+
+        if (department != null) {
+            logger.info("Department successfully loaded. Department details: " + department);
+        } else {
+            logger.info("Department not found!");
+        }
+
+        return department;
+    }
+
+    @Override
     public List<Department> list() {
         Session session = this.sessionFactory.openSession();
         List<Department> result = session.createQuery("from Department ").list();
@@ -46,6 +74,7 @@ public class DepartmentDao implements Dao<Department> {
         return result;
     }
 
+    @Override
     public List<Department> fillDemoData() {
         save(new Department("Department Kiev"));
         save(new Department("Department Kharkov"));
