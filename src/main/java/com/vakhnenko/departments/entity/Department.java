@@ -28,7 +28,6 @@ public class Department implements Essence, java.io.Serializable {
     private Set<Employee> employees;
 
     public Department() {
-
     }
 
     public Department(String name) {

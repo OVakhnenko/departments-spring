@@ -5,6 +5,8 @@ import com.vakhnenko.departments.entity.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DepartmentService {
 
@@ -13,5 +15,13 @@ public class DepartmentService {
 
     public void add(Department department) {
         departmentDao.save(department);
+    }
+
+    public List<Department> list() {
+        return departmentDao.list();
+    }
+
+    public List<Department> fillDemoData() {
+        return departmentDao.fillDemoData();
     }
 }

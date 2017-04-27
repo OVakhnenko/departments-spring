@@ -42,12 +42,7 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/demonstration", method = RequestMethod.POST)
     public String Demonstration(ModelMap model) {
-        List<Department> listDepartments = new ArrayList<>();
-        listDepartments.add(new Department("Department 1"));
-        listDepartments.add(new Department("Department 2"));
-        listDepartments.add(new Department("Department 3"));
-        listDepartments.add(new Department("Department 4"));
-        model.addAttribute("listDepartments", listDepartments);
+        model.addAttribute("listDepartments", this.departmentService.fillDemoData());
         model.addAttribute("department", new Department());
         return "departments";
     }
@@ -63,6 +58,7 @@ public class DepartmentsController {
     }
 
     private String AddDepartment(ModelMap model) {
+        model.addAttribute("listDepartments", this.departmentService.list());
         model.addAttribute("department", new Department());
         return "departments";
     }
