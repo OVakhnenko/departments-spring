@@ -107,4 +107,9 @@ public class Employee implements Essence, java.io.Serializable {
     public String getMethodology() {
         return methodology;
     }
+
+    @Override
+    public String toString() {
+        return "Employee { name=" + name + " id=" + employee_id + '}';
+    }
 }

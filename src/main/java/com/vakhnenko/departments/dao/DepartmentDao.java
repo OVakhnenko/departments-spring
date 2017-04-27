@@ -43,6 +43,7 @@ public class DepartmentDao implements Dao<Department> {
 
         if (department != null) {
             session.delete(department);
+            session.close();
             logger.info("Department successfully deleted. Department details: " + department);
         } else {
             logger.info("Department not found!");

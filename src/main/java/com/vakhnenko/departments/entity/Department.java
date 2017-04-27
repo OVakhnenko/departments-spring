@@ -34,7 +34,7 @@ public class Department implements Essence, java.io.Serializable {
         this.name = name;
     }
 
-    public void setDepartment_id(int id) {
+    public void setDepartment_id(int department_id) {
         this.department_id = department_id;
     }
 
@@ -61,5 +61,10 @@ public class Department implements Essence, java.io.Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL)
     public Set<Employee> getEmployees() {
         return employees;
+    }
+
+    @Override
+    public String toString() {
+        return "Department { name=" + name + " id=" + department_id + '}';
     }
 }

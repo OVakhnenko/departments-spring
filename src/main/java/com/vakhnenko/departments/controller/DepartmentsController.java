@@ -29,8 +29,8 @@ public class DepartmentsController {
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping("/department/remove/{id}")
-    public String removeBook(@PathVariable("id") int id) {
+    @RequestMapping(value = "/department/remove/{id}", method = RequestMethod.GET)
+    public String removeDepartment(@PathVariable("id") int id) {
         this.departmentService.remove(id);
         return "redirect:/departments";
     }
