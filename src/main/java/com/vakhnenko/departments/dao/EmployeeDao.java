@@ -40,7 +40,7 @@ public class EmployeeDao implements Dao<Employee> {
 
     public List<Employee> list() {
         Session session = this.sessionFactory.openSession();
-        List<Employee> result = session.createQuery("from Department ").list();
+        List<Employee> result = session.createQuery("from Employee ").list();
 
         for (Employee employee : result) {
             logger.info("Employee list: " + employee);

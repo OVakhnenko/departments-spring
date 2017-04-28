@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -22,6 +23,7 @@ import java.util.Set;
         @UniqueConstraint(columnNames = "name")})
 public class Department implements Essence, java.io.Serializable {
 
+    @NotNull
     private int department_id;
     @NotEmpty
     private String name;

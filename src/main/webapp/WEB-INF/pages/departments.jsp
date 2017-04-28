@@ -67,7 +67,7 @@
     <form:form method="POST" commandName="department" action="/department/add">
         <tr>
             <td>
-                <label for="nameInput">Name: </label>
+                <label for="nameInput">Name: (id=${department.getDepartment_id()})</label>
                 <form:input path="name" id="nameInput"></form:input>
             </td>
             <td><form:errors path="name" cssStyle="color: #ff0000;" element="div"></form:errors></td>

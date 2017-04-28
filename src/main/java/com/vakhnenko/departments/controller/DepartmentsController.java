@@ -29,7 +29,7 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/department/add", method = RequestMethod.POST)
     public String addDepartment(@Valid @ModelAttribute("department") Department department,
-                                BindingResult result) {
+                                Model model, BindingResult result) {
 
         if (result.hasErrors()) {
             return "departments";
