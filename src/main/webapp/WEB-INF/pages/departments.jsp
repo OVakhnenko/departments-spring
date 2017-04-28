@@ -71,8 +71,14 @@
             <td>
                 <button type="submit" class="btn btn-info">Add department</button>
                 <button formaction="/demonstration" type="submit" class="btn btn-info">Demonstration data</button>
+                <button formaction="/delete/all" type="submit" class="btn btn-info">Delete all data</button>
             </td>
         </tr>
+        <c:if test="${not empty actionMessage}">
+            <div class="alert alert-success">
+                <strong>Success!</strong> ${actionMessage}
+            </div>
+        </c:if>
     </form:form>
 </table>
 </body>

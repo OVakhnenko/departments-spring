@@ -21,6 +21,10 @@ public class DepartmentService {
         departmentDao.remove(id);
     }
 
+    public void deleteAll() {
+        departmentDao.deleteAll();
+    }
+
     public List<Department> list() {
         return departmentDao.list();
     }

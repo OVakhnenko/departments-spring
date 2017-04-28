@@ -29,15 +29,9 @@ public class DepartmentsController {
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping(value = "/department/remove/{id}", method = RequestMethod.GET)
-    public String removeDepartment(@PathVariable("id") int id) {
-        this.departmentService.remove(id);
-        return "redirect:/departments";
-    }
-
     @RequestMapping(value = "/department/add", method = RequestMethod.POST)
     public String addDepartment(@Valid @ModelAttribute("department") Department department,
-                          BindingResult result, Map<String, Object> model) {
+                                BindingResult result) {
 
         if (result.hasErrors()) {
             return "departments";
@@ -47,8 +41,23 @@ public class DepartmentsController {
         }
     }
 
+    @RequestMapping(value = "/department/remove/{id}", method = RequestMethod.GET)
+    public String removeDepartment(@PathVariable("id") int id) {
+        this.departmentService.remove(id);
+        return "redirect:/departments";
+    }
+
+    @RequestMapping(value = "/delete/all", method = RequestMethod.POST)
+    public String deleteAll(ModelMap model) {
+        this.departmentService.deleteAll();
+        model.addAttribute("actionMessage", "All data is deleted.");
+        model.addAttribute("department", new Department());
+        return "departments";
+    }
+
     @RequestMapping(value = "/demonstration", method = RequestMethod.POST)
     public String Demonstration(ModelMap model) {
+        model.addAttribute("actionMessage", "Demonstartion data is filled.");
         model.addAttribute("listDepartments", this.departmentService.fillDemoData());
         model.addAttribute("department", new Department());
         return "departments";
