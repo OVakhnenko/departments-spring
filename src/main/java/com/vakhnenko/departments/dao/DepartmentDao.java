@@ -29,7 +29,11 @@ public class DepartmentDao implements Dao<Department> {
         Session session = sessionFactory.openSession();
 
         try {
-            session.persist(department);
+            if (department.getDepartment_id() == 0) {
+                session.persist(department);
+            } else {
+                session.update(department);
+            }
             session.flush();
         } catch (ConstraintViolationException e) {
             logger.error("DEPSPRERR: Dublicate entry!", e);
@@ -65,7 +69,7 @@ public class DepartmentDao implements Dao<Department> {
     @Override
     public Department getEssenceById(int id) {
         Session session = this.sessionFactory.openSession();
-        Department department = (Department) session.load(Department.class, new Integer(id));
+        Department department = (Department) session.get(Department.class, new Integer(id));
 
         if (department != null) {
             logger.info("Department successfully loaded. Department details: " + department);

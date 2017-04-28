@@ -6,6 +6,7 @@ import com.vakhnenko.departments.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,6 +39,13 @@ public class DepartmentsController {
         }
     }
 
+    @RequestMapping(value = "/department/edit/{id}", method = RequestMethod.GET)
+    public String editDepartment(@PathVariable("id") int id, Model model) {
+        model.addAttribute("department", this.departmentService.getEssenceById(id));
+        model.addAttribute("listDepartments", this.departmentService.list());
+        return "departments";
+    }
+
     @RequestMapping(value = "/department/remove/{id}", method = RequestMethod.GET)
     public String removeDepartment(@PathVariable("id") int id) {
         this.departmentService.remove(id);
@@ -58,6 +66,11 @@ public class DepartmentsController {
         model.addAttribute("listDepartments", this.departmentService.fillDemoData());
         model.addAttribute("department", new Department());
         return "departments";
+    }
+
+    @RequestMapping(value = "/department/cancel", method = RequestMethod.POST)
+    public String cancelDepartment1(ModelMap model) {
+        return AddDepartment(model);
     }
 
     @RequestMapping(value = "/departments", method = RequestMethod.GET)

@@ -25,6 +25,10 @@ public class DepartmentService {
         departmentDao.deleteAll();
     }
 
+    public Department getEssenceById(int id) {
+        return departmentDao.getEssenceById(id);
+    }
+
     public List<Department> list() {
         return departmentDao.list();
     }

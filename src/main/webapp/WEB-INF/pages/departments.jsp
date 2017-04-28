@@ -56,7 +56,12 @@
     </tbody>
 </table>
 
-<div class="alert alert-info" role="alert">New Department</div>
+<c:if test="${department.getDepartment_id() == 0}">
+    <div class="alert alert-info" role="alert">New Department</div>
+</c:if>
+<c:if test="${department.getDepartment_id() > 0}">
+    <div class="alert alert-info" role="alert">Edit Department</div>
+</c:if>
 
 <table>
     <form:form method="POST" commandName="department" action="/department/add">
@@ -71,12 +76,13 @@
             <td>
                 <c:if test="${department.getDepartment_id() == 0}">
                     <button type="submit" class="btn btn-info">Add department</button>
+                    <button formaction="/demonstration" type="submit" class="btn btn-info">Demonstration data</button>
+                    <button formaction="/delete/all" type="submit" class="btn btn-info">Delete all data</button>
                 </c:if>
                 <c:if test="${department.getDepartment_id() > 0}">
-                    <button type="submit" class="btn btn-info">Update department</button>
+                    <button type="submit" class="btn btn-info">Update</button>
+                    <button formaction="/department/cancel" type="submit" class="btn btn-info">Cancel</button>
                 </c:if>
-                <button formaction="/demonstration" type="submit" class="btn btn-info">Demonstration data</button>
-                <button formaction="/delete/all" type="submit" class="btn btn-info">Delete all data</button>
             </td>
         </tr>
         <c:if test="${not empty actionMessage}">
