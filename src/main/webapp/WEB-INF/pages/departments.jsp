@@ -69,7 +69,12 @@
         </tr>
         <tr>
             <td>
-                <button type="submit" class="btn btn-info">Add department</button>
+                <c:if test="${department.getDepartment_id() == 0}">
+                    <button type="submit" class="btn btn-info">Add department</button>
+                </c:if>
+                <c:if test="${department.getDepartment_id() > 0}">
+                    <button type="submit" class="btn btn-info">Update department</button>
+                </c:if>
                 <button formaction="/demonstration" type="submit" class="btn btn-info">Demonstration data</button>
                 <button formaction="/delete/all" type="submit" class="btn btn-info">Delete all data</button>
             </td>
