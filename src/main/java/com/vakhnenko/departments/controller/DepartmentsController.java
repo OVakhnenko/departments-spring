@@ -29,11 +29,12 @@ public class DepartmentsController {
     @Qualifier("employeeService")
     private EmployeeService employeeService;
 
-    @RequestMapping(value = "/department/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/department/add")
     public String addDepartment(@Valid @ModelAttribute("department") Department department,
-                                BindingResult result) {
+                                BindingResult result, Model model) {
 
         if (result.hasErrors()) {
+            model.addAttribute("listDepartments", this.departmentService.list());
             return "departments";
         } else {
             this.departmentService.save(department);
@@ -57,21 +58,21 @@ public class DepartmentsController {
     @RequestMapping(value = "/delete/all", method = RequestMethod.POST)
     public String deleteAll(ModelMap model) {
         this.departmentService.deleteAll();
-        model.addAttribute("actionMessage", "All data is deleted.");
         model.addAttribute("department", new Department());
+        model.addAttribute("actionMessage", "All data is deleted.");
         return "departments";
     }
 
     @RequestMapping(value = "/demonstration", method = RequestMethod.POST)
     public String Demonstration(ModelMap model) {
-        model.addAttribute("actionMessage", "Demonstartion data is filled.");
         model.addAttribute("listDepartments", this.departmentService.fillDemoData());
         model.addAttribute("department", new Department());
+        model.addAttribute("actionMessage", "Demonstartion data is filled.");
         return "departments";
     }
 
     @RequestMapping(value = "/department/cancel", method = RequestMethod.POST)
-    public String cancelDepartment1(ModelMap model) {
+    public String cancelDepartment(ModelMap model) {
         return AddDepartment(model);
     }
 
