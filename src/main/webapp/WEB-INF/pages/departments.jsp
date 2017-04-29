@@ -14,6 +14,13 @@
 
     <title>Departments</title>
 
+    <style type="text/css">
+        label {
+            display: block;
+            width: 100px;
+        }
+    </style>
+
     <!-- Bootstrap core CSS -->
     <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
     <link href="${bootstrap}" rel="stylesheet"/>
@@ -65,9 +72,19 @@
 
 <table>
     <form:form method="POST" commandName="department" action="/department/add">
+        <c:if test="${department.getDepartment_id() > 0}">
+            <tr>
+                <td>
+                    <label for="idInput">id:</label>
+                    <form:input path="department_id" id="idInput" readonly="true" disabled="true"></form:input>
+                    <form:hidden path="department_id"/>
+                </td>
+            </tr>
+            <tr>
+        </c:if>
         <tr>
             <td>
-                <label for="nameInput">Name: (id=${department.getDepartment_id()})</label>
+                <label for="nameInput">Name:</label>
                 <form:input path="name" id="nameInput"></form:input>
             </td>
             <td><form:errors path="name" cssStyle="color: #ff0000;" element="div"></form:errors></td>

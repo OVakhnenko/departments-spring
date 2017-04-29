@@ -25,6 +25,7 @@ public class DepartmentsController {
     private DepartmentService departmentService;
 
     @Autowired
+    @Qualifier("employeeService")
     private EmployeeService employeeService;
 
     @RequestMapping(value = "/department/add", method = RequestMethod.POST)
