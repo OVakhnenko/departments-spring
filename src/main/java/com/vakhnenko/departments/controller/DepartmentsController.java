@@ -3,6 +3,7 @@ package com.vakhnenko.departments.controller;
 import com.vakhnenko.departments.entity.Department;
 import com.vakhnenko.departments.service.DepartmentService;
 import com.vakhnenko.departments.service.EmployeeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/department/add", method = RequestMethod.POST)
     public String addDepartment(@Valid @ModelAttribute("department") Department department,
-                                Model model, BindingResult result) {
+                                BindingResult result) {
 
         if (result.hasErrors()) {
             return "departments";
