@@ -1,6 +1,7 @@
 package com.vakhnenko.departments.controller;
 
 import com.vakhnenko.departments.entity.Department;
+import com.vakhnenko.departments.entity.Employee;
 import com.vakhnenko.departments.service.DepartmentService;
 import com.vakhnenko.departments.service.EmployeeService;
 
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -29,7 +32,7 @@ public class DepartmentsController {
     @Qualifier("employeeService")
     private EmployeeService employeeService;
 
-    @RequestMapping(value = "/department/add")
+    @RequestMapping(value = "/add/department")
     public String addDepartment(@Valid @ModelAttribute("department") Department department,
                                 BindingResult result, Model model) {
 
@@ -42,14 +45,32 @@ public class DepartmentsController {
         }
     }
 
-    @RequestMapping(value = "/department/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/department/{id}", method = RequestMethod.GET)
+    public String employees(@PathVariable("id") int id, Model model) {
+        Department department = this.departmentService.getEssenceById(id);
+        Employee employee = new Employee();
+        employee.setDepartment(department);
+
+        Map<String, String> typeEmployee = new LinkedHashMap<>();
+        typeEmployee.put("M", "Manager");
+        typeEmployee.put("D", "Developer");
+
+        model.addAttribute("typeEmployee", typeEmployee);
+        model.addAttribute("employee", employee);
+        model.addAttribute("department", department);
+        model.addAttribute("listEmployees", this.employeeService.list());
+
+        return "employees";
+    }
+
+    @RequestMapping(value = "/edit/department/{id}", method = RequestMethod.GET)
     public String editDepartment(@PathVariable("id") int id, Model model) {
         model.addAttribute("department", this.departmentService.getEssenceById(id));
         model.addAttribute("listDepartments", this.departmentService.list());
         return "departments";
     }
 
-    @RequestMapping(value = "/department/remove/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/remove/department/{id}", method = RequestMethod.GET)
     public String removeDepartment(@PathVariable("id") int id) {
         this.departmentService.remove(id);
         return "redirect:/departments";
@@ -71,22 +92,22 @@ public class DepartmentsController {
         return "departments";
     }
 
-    @RequestMapping(value = "/department/cancel", method = RequestMethod.POST)
+    @RequestMapping(value = "/cancel/department", method = RequestMethod.POST)
     public String cancelDepartment(ModelMap model) {
-        return AddDepartment(model);
+        return departments(model);
     }
 
-    @RequestMapping(value = "/departments", method = RequestMethod.GET)
-    public String AddDepartment1(ModelMap model) {
-        return AddDepartment(model);
+    @RequestMapping(value = "/departments")
+    public String departments1(ModelMap model) {
+        return departments(model);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String AddDepartment2(ModelMap model) {
-        return AddDepartment(model);
+    public String departments2(ModelMap model) {
+        return departments(model);
     }
 
-    private String AddDepartment(ModelMap model) {
+    private String departments(ModelMap model) {
         model.addAttribute("listDepartments", this.departmentService.list());
         model.addAttribute("department", new Department());
         return "departments";

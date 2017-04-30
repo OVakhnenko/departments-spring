@@ -52,10 +52,10 @@
     <c:if test="${!empty listDepartments}">
         <c:forEach items="${listDepartments}" var="department">
             <tr>
-                <td><a href="/department/${department.getDepartment_id()}">${department.getName()}</a></td>
-                <td><a href="<c:url value='/department/edit/${department.getDepartment_id()}'/>"><span
+                <td><a href="/department/${department.department_id}">${department.name}</a></td>
+                <td><a href="<c:url value='/edit/department/${department.department_id}'/>"><span
                         class="glyphicon glyphicon-edit"></span></a></td>
-                <td><a href="<c:url value='/department/remove/${department.getDepartment_id()}'/>"><span
+                <td><a href="<c:url value='/remove/department/${department.department_id}'/>"><span
                         class="glyphicon glyphicon-remove-sign"></span></a></td>
             </tr>
         </c:forEach>
@@ -63,16 +63,16 @@
     </tbody>
 </table>
 
-<c:if test="${department.getDepartment_id() == 0}">
+<c:if test="${department.department_id == 0}">
     <div class="alert alert-info" role="alert">New Department</div>
 </c:if>
-<c:if test="${department.getDepartment_id() > 0}">
+<c:if test="${department.department_id > 0}">
     <div class="alert alert-info" role="alert">Edit Department</div>
 </c:if>
 
 <table>
-    <form:form method="POST" commandName="department" action="/department/add">
-        <c:if test="${department.getDepartment_id() > 0}">
+    <form:form method="POST" commandName="department" action="/add/department">
+        <c:if test="${department.department_id > 0}">
             <tr>
                 <td>
                     <label for="idInput">id:</label>
@@ -91,14 +91,14 @@
         </tr>
         <tr>
             <td>
-                <c:if test="${department.getDepartment_id() == 0}">
+                <c:if test="${department.department_id == 0}">
                     <button type="submit" class="btn btn-info">Add department</button>
                     <button formaction="/demonstration" type="submit" class="btn btn-info">Demonstration data</button>
                     <button formaction="/delete/all" type="submit" class="btn btn-info">Delete all data</button>
                 </c:if>
-                <c:if test="${department.getDepartment_id() > 0}">
+                <c:if test="${department.department_id > 0}">
                     <button type="submit" class="btn btn-info">Update</button>
-                    <button formaction="/department/cancel" type="submit" class="btn btn-info">Cancel</button>
+                    <button formaction="/cancel/department" type="submit" class="btn btn-info">Cancel</button>
                 </c:if>
             </td>
         </tr>

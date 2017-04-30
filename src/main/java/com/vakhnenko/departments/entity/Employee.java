@@ -14,16 +14,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "employee", catalog = "departments", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class Employee implements Essence, java.io.Serializable {
 
     private int employee_id;
+    @Min(18)
+    @Max(99)
     private int age;
-
     @NotEmpty
     private String name;
+    @NotEmpty
     private String type;
     private String language;
     private String methodology;
