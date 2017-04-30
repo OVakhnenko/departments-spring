@@ -66,17 +66,17 @@
     </c:if>
     </tbody>
 </table>
-
-<c:if test="${employee.employee_id == 0}">
+<c:set var="employeeID" scope="session" value="${employee.employee_id}"/>
+<c:if test="${employeeID == 0}">
     <div class="alert alert-info" role="alert">New Employee</div>
 </c:if>
-<c:if test="${employee.employee_id > 0}">
+<c:if test="${employeeID > 0}">
     <div class="alert alert-info" role="alert">Edit Employee</div>
 </c:if>
 
 <table>
-    <form:form method="POST" commandName="employee"
-               action="/add/department/${department.department_id}/employee/${employee.employee_id}">
+    <c:url var="formAction" value="/add/department/${department.department_id}/employee/${employee.employee_id}"/>
+    <form:form method="POST" commandName="employee" action="${formAction}">
         <tr>
             <td>
                 <label for="idDepInput">Department id:</label>
@@ -142,11 +142,11 @@
         </tr>
         <tr>
             <td>
-                <c:if test="${employee.employee_id == 0}">
+                <c:if test="${employeeID == 0}">
                     <button type="submit" class="btn btn-info">Add employee</button>
                     <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
                 </c:if>
-                <c:if test="${employee.employee_id > 0}">
+                <c:if test="${employeeID > 0}">
                     <button type="submit" class="btn btn-info">Update employee</button>
                     <button formaction="/cancel/employee" type="submit" class="btn btn-info">Cancel</button>
                 </c:if>

@@ -4,6 +4,7 @@ import com.vakhnenko.departments.entity.Department;
 import com.vakhnenko.departments.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,22 @@ public class EmployeeDao implements Dao<Employee> {
 
     @Override
     public void save(Employee employee) {
-        Session session = this.sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
 
-        session.persist(employee);
-        session.flush();
-        session.close();
+        try {
+            if (employee.getEmployee_id() == 0) {
+                session.persist(employee);
+            } else {
+                session.update(employee);
+            }
+            session.flush();
+        } catch (ConstraintViolationException e) {
+            logger.error("DEPSPRERR: Dublicate employee entry!", e);
+        } finally {
+            session.close();
+        }
 
-        logger.info("Department successfully saved. Department name: " + employee.getName());
+        logger.info("Employee successfully saved. Employee name: " + employee.getName());
     }
 
     @Override

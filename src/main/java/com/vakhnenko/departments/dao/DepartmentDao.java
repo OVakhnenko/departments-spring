@@ -36,7 +36,7 @@ public class DepartmentDao implements Dao<Department> {
             }
             session.flush();
         } catch (ConstraintViolationException e) {
-            logger.error("DEPSPRERR: Dublicate entry!", e);
+            logger.error("DEPSPRERR: Dublicate department entry!", e);
         } finally {
             session.close();
         }

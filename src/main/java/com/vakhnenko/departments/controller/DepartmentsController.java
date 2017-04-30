@@ -45,6 +45,19 @@ public class DepartmentsController {
         }
     }
 
+    @RequestMapping(value = "/add/department/{dID}/employee.{eID}")
+    public String addEmployee(@Valid @ModelAttribute("employee") Employee employee,
+                              BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("listDepartments", this.departmentService.list());
+            return "departments";
+        } else {
+            this.employeeService.save(employee);
+            return "redirect:/departments";
+        }
+    }
+
     @RequestMapping(value = "/department/{id}", method = RequestMethod.GET)
     public String employees(@PathVariable("id") int id, Model model) {
         Department department = this.departmentService.getEssenceById(id);

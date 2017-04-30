@@ -11,8 +11,14 @@ import java.util.List;
 
 @Service
 public class EmployeeService {
+
     @Autowired
     private EmployeeDao employeeDao;
+
+    @Transactional
+    public void save(Employee employee) {
+        employeeDao.save(employee);
+    }
 
     @Transactional
     public List<Employee> list() {
