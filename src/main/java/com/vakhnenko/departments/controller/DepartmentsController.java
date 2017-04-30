@@ -45,12 +45,13 @@ public class DepartmentsController {
         }
     }
 
-    @RequestMapping(value = "/add/department/{dID}/employee.{eID}")
+    @RequestMapping(value = "/add/department/{dID}/employee/{eID}")
     public String addEmployee(@Valid @ModelAttribute("employee") Employee employee,
-                              BindingResult result, Model model) {
+                              BindingResult result, @PathVariable("dID") int department_id,
+                              @PathVariable("eID") int employee_id, Model model) {
 
         if (result.hasErrors()) {
-            model.addAttribute("listDepartments", this.departmentService.list());
+            model.addAttribute("listDepartments", this.employeeService.list());
             return "departments";
         } else {
             this.employeeService.save(employee);
