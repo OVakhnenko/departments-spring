@@ -54,7 +54,7 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/add/department/{dID}/employee/{eID}")
     public String addEmployee(@Valid @ModelAttribute("employee") Employee employee,
-                              BindingResult result, Model model) {
+                              BindingResult result, Model model, @PathVariable("dID") int department_id) {
 
         boolean hasMethOrLangError = employee.hasMethodologyOrLanguageError();
         if (result.hasErrors() || hasMethOrLangError) {
@@ -68,7 +68,7 @@ public class DepartmentsController {
             return "employees";
         } else {
             this.employeeService.save(employee);
-            return "redirect:/employees";
+            return "redirect:/department/" + department_id;
         }
     }
 
@@ -85,11 +85,35 @@ public class DepartmentsController {
         return "employees";
     }
 
+    @RequestMapping(value = "/department/{dID}/employee/{eID}", method = RequestMethod.GET)
+    public String employees(@PathVariable("dID") int department_id, @PathVariable("eID") int employee_id, Model model) {
+        Department department = this.departmentService.getEssenceById(department_id);
+        Employee employee = this.employeeService.getEssenceById(employee_id);
+        employee.setDepartment(department);
+
+        model.addAttribute("employee", employee);
+        model.addAttribute("department", department);
+        return "employee";
+    }
+
     @RequestMapping(value = "/edit/department/{id}", method = RequestMethod.GET)
     public String editDepartment(@PathVariable("id") int id, Model model) {
         model.addAttribute("department", this.departmentService.getEssenceById(id));
         model.addAttribute("listDepartments", this.departmentService.list());
         return "departments";
+    }
+
+    @RequestMapping(value = "/edit/department/{dID}/employee/{eID}", method = RequestMethod.GET)
+    public String editEmployee(@PathVariable("dID") int department_id, @PathVariable("eID") int employee_id, Model model) {
+        Department department = this.departmentService.getEssenceById(department_id);
+        Employee employee = this.employeeService.getEssenceById(employee_id);
+        employee.setDepartment(department);
+
+        model.addAttribute("typeEmployee", typeEmployee);
+        model.addAttribute("employee", employee);
+        model.addAttribute("department", department);
+        model.addAttribute("listEmployees", this.employeeService.list(department));
+        return "employees";
     }
 
     @RequestMapping(value = "/remove/department/{id}", method = RequestMethod.GET)
@@ -110,7 +134,7 @@ public class DepartmentsController {
         model.addAttribute("employee", employee);
         model.addAttribute("department", department);
         model.addAttribute("listEmployees", this.employeeService.list(department));
-        return "redirect:/employees";
+        return "redirect:/department/" + department_id;
     }
 
     @RequestMapping(value = "/delete/all", method = RequestMethod.POST)
@@ -127,6 +151,11 @@ public class DepartmentsController {
         model.addAttribute("department", new Department());
         model.addAttribute("actionMessage", "Demonstartion data is filled.");
         return "departments";
+    }
+
+    @RequestMapping(value = "/cancel/department/{dID}/employee", method = RequestMethod.POST)
+    public String cancelEmployee(@PathVariable("dID") int department_id, ModelMap model) {
+        return "redirect:/department/" + department_id;
     }
 
     @RequestMapping(value = "/cancel/department", method = RequestMethod.POST)

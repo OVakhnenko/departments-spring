@@ -27,6 +27,11 @@ public class EmployeeService {
     }
 
     @Transactional
+    public Employee getEssenceById(int id) {
+        return employeeDao.getEssenceById(id);
+    }
+
+    @Transactional
     public List<Employee> list() {
         return employeeDao.list();
     }
