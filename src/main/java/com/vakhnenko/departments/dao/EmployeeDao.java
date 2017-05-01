@@ -41,11 +41,32 @@ public class EmployeeDao implements Dao<Employee> {
 
     @Override
     public void remove(int id) {
+        Session session = this.sessionFactory.openSession();
+        Employee employee = (Employee) session.get(Employee.class, new Integer(id));
+
+        if (employee != null) {
+            session.delete(employee);
+            session.flush();
+            session.close();
+            logger.info("Employee successfully deleted. Employee details: " + employee);
+        } else {
+            logger.info("Employee not found!");
+        }
     }
 
     @Override
     public Employee getEssenceById(int id) {
-        return null;
+        Session session = this.sessionFactory.openSession();
+        Employee employee = (Employee) session.get(Employee.class, new Integer(id));
+        session.close();
+
+        if (employee != null) {
+            logger.info("Employee successfully loaded. Employee details: " + employee);
+        } else {
+            logger.info("Employee not found!");
+        }
+
+        return employee;
     }
 
     @Override

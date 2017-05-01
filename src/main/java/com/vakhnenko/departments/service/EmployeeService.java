@@ -22,6 +22,11 @@ public class EmployeeService {
     }
 
     @Transactional
+    public void remove(int id) {
+        employeeDao.remove(id);
+    }
+
+    @Transactional
     public List<Employee> list() {
         return employeeDao.list();
     }

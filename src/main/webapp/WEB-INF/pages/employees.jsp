@@ -39,6 +39,8 @@
     <thead>
     <tr>
         <th>Name</th>
+        <th>Age</th>
+        <th>Type</th>
         <th width="60">Edit</th>
         <th width="60">Delete</th>
     </tr>
@@ -55,6 +57,8 @@
                 <td>
                     <a href="/department/${department.department_id}/employee/${tmpEmployee.employee_id}">${tmpEmployee.name}</a>
                 </td>
+                <td>${tmpEmployee.age}</td>
+                <td>${tmpEmployee.type}</td>
                 <td>
                     <a href="<c:url value='/edit/department/${department.department_id}/employee/${tmpEmployee.employee_id}'/>"><span
                             class="glyphicon glyphicon-edit"></span></a></td>

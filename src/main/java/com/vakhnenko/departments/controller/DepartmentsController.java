@@ -98,6 +98,21 @@ public class DepartmentsController {
         return "redirect:/departments";
     }
 
+    @RequestMapping(value = "/remove/department/{dID}/employee/{eID}", method = RequestMethod.GET)
+    public String removeEmployee(@PathVariable("eID") int employee_id, @PathVariable("dID") int department_id, Model model) {
+        this.employeeService.remove(employee_id);
+
+        Department department = this.departmentService.getEssenceById(department_id);
+        Employee employee = new Employee();
+        employee.setDepartment(department);
+
+        model.addAttribute("typeEmployee", typeEmployee);
+        model.addAttribute("employee", employee);
+        model.addAttribute("department", department);
+        model.addAttribute("listEmployees", this.employeeService.list(department));
+        return "redirect:/employees";
+    }
+
     @RequestMapping(value = "/delete/all", method = RequestMethod.POST)
     public String deleteAll(ModelMap model) {
         this.departmentService.deleteAll();
