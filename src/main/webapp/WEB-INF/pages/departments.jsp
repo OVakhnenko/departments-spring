@@ -105,6 +105,16 @@
                 </c:if>
             </td>
         </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <button formaction="/report/all" type="submit" class="btn btn-info">Report "All"</button>
+                <button formaction="/report/age" type="submit" class="btn btn-info">Report "Age"</button>
+                <button formaction="/report/top" type="submit" class="btn btn-info">Report "Top"</button>
+            </td>
+        </tr>
         <c:if test="${not empty actionMessage}">
             <div class="alert alert-success">
                 <strong>Success!</strong> ${actionMessage}
