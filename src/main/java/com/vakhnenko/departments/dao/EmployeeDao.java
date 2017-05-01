@@ -30,13 +30,12 @@ public class EmployeeDao implements Dao<Employee> {
                 session.update(employee);
             }
             session.flush();
+            logger.info("Employee successfully saved. Employee name: " + employee.getName());
         } catch (ConstraintViolationException e) {
             logger.error("DEPSPRERR: Dublicate employee entry!", e);
         } finally {
             session.close();
         }
-
-        logger.info("Employee successfully saved. Employee name: " + employee.getName());
     }
 
     @Override
@@ -51,6 +50,7 @@ public class EmployeeDao implements Dao<Employee> {
     public List<Employee> list() {
         Session session = this.sessionFactory.openSession();
         List<Employee> result = session.createQuery("from Employee ").list();
+        session.close();
 
         for (Employee employee : result) {
             logger.info("Employee list: " + employee);

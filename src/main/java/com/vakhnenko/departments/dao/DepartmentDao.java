@@ -35,13 +35,12 @@ public class DepartmentDao implements Dao<Department> {
                 session.update(department);
             }
             session.flush();
+            logger.info("Department successfully saved. Department name: " + department.getName());
         } catch (ConstraintViolationException e) {
             logger.error("DEPSPRERR: Dublicate department entry!", e);
         } finally {
             session.close();
         }
-
-        logger.info("Department successfully saved. Department name: " + department.getName());
     }
 
     @Override
@@ -64,12 +63,14 @@ public class DepartmentDao implements Dao<Department> {
 
         session.createQuery("delete from Department").executeUpdate();
         session.createQuery("delete from Employee").executeUpdate();
+        session.close();
     }
 
     @Override
     public Department getEssenceById(int id) {
         Session session = this.sessionFactory.openSession();
         Department department = (Department) session.get(Department.class, new Integer(id));
+        session.close();
 
         if (department != null) {
             logger.info("Department successfully loaded. Department details: " + department);
@@ -84,6 +85,7 @@ public class DepartmentDao implements Dao<Department> {
     public List<Department> list() {
         Session session = this.sessionFactory.openSession();
         List<Department> result = session.createQuery("from Department ").list();
+        session.close();
 
         for (Department department : result) {
             logger.info("Department list: " + department);

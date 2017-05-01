@@ -18,8 +18,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
-@Table(name = "department", catalog = "departments", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "name")})
+@Table(name = "department", catalog = "departments", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class Department implements Essence, java.io.Serializable {
 
     private int department_id;

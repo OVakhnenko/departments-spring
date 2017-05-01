@@ -112,6 +112,23 @@ public class Employee implements Essence, java.io.Serializable {
         return methodology;
     }
 
+    public boolean hasMethodologyOrLanguageError() {
+        boolean developer = type.equals("D");
+        boolean hasMethodology = !methodology.equals("");
+        boolean manager = type.equals("M");
+        boolean hasLanguage = !language.equals("");
+
+        if ((!developer && !manager) ||
+                (developer && hasMethodology) ||
+                (manager && hasLanguage) ||
+                (developer && !hasLanguage) ||
+                (manager && !hasMethodology)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public String toString() {
         return "Employee { name=" + name + " id=" + employee_id + '}';

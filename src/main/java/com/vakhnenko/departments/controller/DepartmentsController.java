@@ -23,6 +23,13 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class DepartmentsController {
+    private static final Map<String, String> typeEmployee;
+
+    static {
+        typeEmployee = new LinkedHashMap<>();
+        typeEmployee.put("M", "Manager");
+        typeEmployee.put("D", "Developer");
+    }
 
     @Autowired
     @Qualifier("departmentService")
@@ -47,15 +54,21 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/add/department/{dID}/employee/{eID}")
     public String addEmployee(@Valid @ModelAttribute("employee") Employee employee,
-                              BindingResult result, @PathVariable("dID") int department_id,
-                              @PathVariable("eID") int employee_id, Model model) {
+                              BindingResult result, Model model) {
 
-        if (result.hasErrors()) {
-            model.addAttribute("listDepartments", this.employeeService.list());
-            return "departments";
+        boolean hasMethOrLangError = employee.hasMethodologyOrLanguageError();
+        if (result.hasErrors() || hasMethOrLangError) {
+            model.addAttribute("typeEmployee", typeEmployee);
+            model.addAttribute("employee", employee);
+            model.addAttribute("department", employee.getDepartment());
+            model.addAttribute("listEmployees", this.employeeService.list());
+            if (hasMethOrLangError) {
+                model.addAttribute("actionError", "Type methodology for manager or language for developer!");
+            }
+            return "employees";
         } else {
             this.employeeService.save(employee);
-            return "redirect:/departments";
+            return "redirect:/employees";
         }
     }
 
@@ -65,15 +78,10 @@ public class DepartmentsController {
         Employee employee = new Employee();
         employee.setDepartment(department);
 
-        Map<String, String> typeEmployee = new LinkedHashMap<>();
-        typeEmployee.put("M", "Manager");
-        typeEmployee.put("D", "Developer");
-
         model.addAttribute("typeEmployee", typeEmployee);
         model.addAttribute("employee", employee);
         model.addAttribute("department", department);
         model.addAttribute("listEmployees", this.employeeService.list());
-
         return "employees";
     }
 

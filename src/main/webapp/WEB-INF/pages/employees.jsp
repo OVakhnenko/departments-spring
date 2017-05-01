@@ -148,7 +148,9 @@
                 </c:if>
                 <c:if test="${employeeID > 0}">
                     <button type="submit" class="btn btn-info">Update employee</button>
-                    <button formaction="/cancel/employee" type="submit" class="btn btn-info">Cancel</button>
+                    <button formaction="/cancel/department/${department.department_id}/employee" type="submit"
+                            class="btn btn-info">Cancel
+                    </button>
                 </c:if>
             </td>
         </tr>
