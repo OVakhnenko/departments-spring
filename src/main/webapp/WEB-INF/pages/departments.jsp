@@ -90,6 +90,9 @@
             <td><form:errors path="name" cssStyle="color: #ff0000;" element="div"></form:errors></td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td>
                 <c:if test="${department.department_id == 0}">
                     <button type="submit" class="btn btn-info">Add department</button>

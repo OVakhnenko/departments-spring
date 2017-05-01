@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Departments</title>
+    <title>Employees</title>
 
     <style type="text/css">
         label {
@@ -144,6 +144,7 @@
             </td>
             <td><form:errors path="methodology" cssStyle="color: #ff0000;" element="div"></form:errors></td>
         </tr>
+        <td>&nbsp;</td>
         <tr>
             <td>
                 <c:if test="${employeeID == 0}">

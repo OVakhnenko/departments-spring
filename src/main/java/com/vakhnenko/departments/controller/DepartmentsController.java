@@ -72,7 +72,7 @@ public class DepartmentsController {
         }
     }
 
-    @RequestMapping(value = "/department/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/department/{id}")
     public String employees(@PathVariable("id") int id, Model model) {
         Department department = this.departmentService.getEssenceById(id);
         Employee employee = new Employee();
