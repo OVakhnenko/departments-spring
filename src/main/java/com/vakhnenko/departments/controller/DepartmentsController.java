@@ -61,9 +61,9 @@ public class DepartmentsController {
             model.addAttribute("typeEmployee", typeEmployee);
             model.addAttribute("employee", employee);
             model.addAttribute("department", employee.getDepartment());
-            model.addAttribute("listEmployees", this.employeeService.list());
+            model.addAttribute("listEmployees", this.employeeService.list(employee.getDepartment()));
             if (hasMethOrLangError) {
-                model.addAttribute("actionError", "Type methodology for manager or language for developer!");
+                model.addAttribute("actionError", "Select type of employee and enter methodology for manager or language for developer!");
             }
             return "employees";
         } else {
@@ -81,7 +81,7 @@ public class DepartmentsController {
         model.addAttribute("typeEmployee", typeEmployee);
         model.addAttribute("employee", employee);
         model.addAttribute("department", department);
-        model.addAttribute("listEmployees", this.employeeService.list());
+        model.addAttribute("listEmployees", this.employeeService.list(department));
         return "employees";
     }
 

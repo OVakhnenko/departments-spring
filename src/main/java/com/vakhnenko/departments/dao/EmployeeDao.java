@@ -2,6 +2,7 @@ package com.vakhnenko.departments.dao;
 
 import com.vakhnenko.departments.entity.Department;
 import com.vakhnenko.departments.entity.Employee;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
@@ -47,9 +48,25 @@ public class EmployeeDao implements Dao<Employee> {
         return null;
     }
 
+    @Override
     public List<Employee> list() {
         Session session = this.sessionFactory.openSession();
-        List<Employee> result = session.createQuery("from Employee ").list();
+        List<Employee> result = session.createQuery("from Employee order by name").list();
+        session.close();
+
+        for (Employee employee : result) {
+            logger.info("Employee list: " + employee);
+        }
+        return result;
+    }
+
+    public List<Employee> list(Department department) {
+        Session session = this.sessionFactory.openSession();
+
+        Query query = session.createQuery("from Employee where department = :dept order by type, name");
+        query.setParameter("dept", department);
+        List<Employee> result = query.list();
+
         session.close();
 
         for (Employee employee : result) {

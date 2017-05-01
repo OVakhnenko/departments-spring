@@ -1,6 +1,7 @@
 package com.vakhnenko.departments.service;
 
 import com.vakhnenko.departments.dao.EmployeeDao;
+import com.vakhnenko.departments.entity.Department;
 import com.vakhnenko.departments.entity.Employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class EmployeeService {
     @Transactional
     public List<Employee> list() {
         return employeeDao.list();
+    }
+
+    @Transactional
+    public List<Employee> list(Department department) {
+        return employeeDao.list(department);
     }
 }

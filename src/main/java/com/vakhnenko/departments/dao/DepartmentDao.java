@@ -61,8 +61,8 @@ public class DepartmentDao implements Dao<Department> {
     public void deleteAll() {
         Session session = this.sessionFactory.openSession();
 
-        session.createQuery("delete from Department").executeUpdate();
         session.createQuery("delete from Employee").executeUpdate();
+        session.createQuery("delete from Department").executeUpdate();
         session.close();
     }
 
@@ -95,9 +95,35 @@ public class DepartmentDao implements Dao<Department> {
 
     @Override
     public List<Department> fillDemoData() {
-        save(new Department("Department Kiev"));
-        save(new Department("Department Kharkov"));
-        save(new Department("Department Odessa"));
+        Department department;
+        Set<Employee> employees;
+
+        department = new Department("Department Kiev");
+        employees = new HashSet<>();
+        department.setEmployees(employees);
+        employees.add(new Employee("EmpM1 kie", "M", 21, "", "Meth1", department));
+        employees.add(new Employee("EmpD1 kie", "D", 21, "Lang1", "", department));
+        employees.add(new Employee("EmpD2 kie", "D", 21, "Lang1", "", department));
+        employees.add(new Employee("EmpD3 kie", "D", 21, "Lang1", "", department));
+        save(department);
+
+        department = new Department("Department Kharkov");
+        employees = new HashSet<>();
+        department.setEmployees(employees);
+        employees.add(new Employee("EmpM1 kha", "M", 22, "", "Meth2", department));
+        employees.add(new Employee("EmpD1 kha", "D", 22, "Lang2", "", department));
+        employees.add(new Employee("EmpD2 kha", "D", 22, "Lang2", "", department));
+        employees.add(new Employee("EmpD3 kha", "D", 22, "Lang2", "", department));
+        save(department);
+
+        department = new Department("Department Odessa");
+        employees = new HashSet<>();
+        department.setEmployees(employees);
+        employees.add(new Employee("EmpM1 ode", "M", 23, "", "Meth3", department));
+        employees.add(new Employee("EmpD1 ode", "D", 23, "Lang3", "", department));
+        employees.add(new Employee("EmpD2 ode", "D", 23, "Lang3", "", department));
+        employees.add(new Employee("EmpD3 ode", "D", 24, "Lang3", "", department));
+        save(department);
 
         logger.info("Departments has been filled demonstartion data.");
         return list();
