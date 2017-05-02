@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -156,6 +158,13 @@ public class DepartmentsController {
     @RequestMapping(value = "/cancel/department/{dID}/employee", method = RequestMethod.POST)
     public String cancelEmployee(@PathVariable("dID") int department_id, ModelMap model) {
         return "redirect:/department/" + department_id;
+    }
+
+    @RequestMapping(value = "/report/all")
+    public String reportAll(Model model) {
+        List<Department> departments = this.departmentService.list();
+        model.addAttribute("listEmployees", this.employeeService.list(departments));
+        return "all";
     }
 
     @RequestMapping(value = "/cancel/department", method = RequestMethod.POST)

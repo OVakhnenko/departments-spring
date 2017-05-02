@@ -84,7 +84,7 @@ public class DepartmentDao implements Dao<Department> {
     @Override
     public List<Department> list() {
         Session session = this.sessionFactory.openSession();
-        List<Department> result = session.createQuery("from Department ").list();
+        List<Department> result = session.createQuery("from Department order by name").list();
         session.close();
 
         for (Department department : result) {

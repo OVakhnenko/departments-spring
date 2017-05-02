@@ -103,17 +103,15 @@
                     <button type="submit" class="btn btn-info">Update</button>
                     <button formaction="/cancel/department" type="submit" class="btn btn-info">Cancel</button>
                 </c:if>
+                <div class="btn-group">
+                    <button type="submit" formaction="/report/all" class="btn btn-primary">All</button>
+                    <button type="submit" formaction="/report/age" class="btn btn-primary">Age</button>
+                    <button type="submit" formaction="/report/top" class="btn btn-primary">Top</button>
+                </div>
             </td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td>
-                <button formaction="/report/all" type="submit" class="btn btn-info">Report "All"</button>
-                <button formaction="/report/age" type="submit" class="btn btn-info">Report "Age"</button>
-                <button formaction="/report/top" type="submit" class="btn btn-info">Report "Top"</button>
-            </td>
         </tr>
         <c:if test="${not empty actionMessage}">
             <div class="alert alert-success">

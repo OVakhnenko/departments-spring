@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,5 +40,22 @@ public class EmployeeService {
     @Transactional
     public List<Employee> list(Department department) {
         return employeeDao.list(department);
+    }
+
+    @Transactional
+    public List<Employee> list(List<Department> departments) {
+        if (departments.size() > 0) {
+            List<Employee> result = new ArrayList<>();
+            for (Department department : departments) {
+                List<Employee> employees = employeeDao.list(department);
+                for (Employee employee : employees) {
+                    employee.setDepartment(department);
+                    result.add(employee);
+                }
+            }
+            return result;
+        } else {
+            return null;
+        }
     }
 }
