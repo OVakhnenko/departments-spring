@@ -121,18 +121,24 @@ public class DepartmentDao implements Dao<Department> {
         employees = new HashSet<>();
         department.setEmployees(employees);
         employees.add(new Employee("EmpM1 kha", "M", 22, "", "Meth2", department));
+        employees.add(new Employee("EmpM2 kha", "M", 22, "", "Meth2", department));
         employees.add(new Employee("EmpD1 kha", "D", 22, "Lang2", "", department));
         employees.add(new Employee("EmpD2 kha", "D", 22, "Lang2", "", department));
         employees.add(new Employee("EmpD3 kha", "D", 22, "Lang2", "", department));
+        employees.add(new Employee("EmpD4 kha", "D", 22, "Lang2", "", department));
         save(department);
 
         department = new Department("Department Odessa");
         employees = new HashSet<>();
         department.setEmployees(employees);
         employees.add(new Employee("EmpM1 ode", "M", 23, "", "Meth3", department));
+        employees.add(new Employee("EmpM2 ode", "M", 23, "", "Meth3", department));
+        employees.add(new Employee("EmpM3 ode", "M", 23, "", "Meth3", department));
         employees.add(new Employee("EmpD1 ode", "D", 23, "Lang3", "", department));
         employees.add(new Employee("EmpD2 ode", "D", 23, "Lang3", "", department));
         employees.add(new Employee("EmpD3 ode", "D", 24, "Lang3", "", department));
+        employees.add(new Employee("EmpD4 ode", "D", 24, "Lang3", "", department));
+        employees.add(new Employee("EmpD5 ode", "D", 24, "Lang3", "", department));
         save(department);
 
         logger.info("Departments has been filled demonstartion data.");

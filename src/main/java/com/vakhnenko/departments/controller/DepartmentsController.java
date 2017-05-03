@@ -189,6 +189,41 @@ public class DepartmentsController {
         return "age";
     }
 
+    @RequestMapping(value = "/report/top")
+    public String reportTop(Model model) {
+        Department department = new Department();
+        Employee employee = new Employee();
+        employee.setDepartment(department);
+
+        model.addAttribute("typeEmployee", typeEmployee);
+        model.addAttribute("mapDepartments", this.departmentService.map());
+        model.addAttribute("employee", employee);
+        model.addAttribute("listEmployees", null);
+        return "top";
+    }
+
+    /*
+    public int getMaxEmployees(String departmentName, String type) {
+        int result = 0;
+
+        if (openSession()) {
+            try {
+                Query query = session.createQuery("select count(*) from Employee where " +
+                        "department_name = :paramDepartmentName and " +
+                        "type = :paramType");
+                query.setParameter("paramDepartmentName", departmentName);
+                query.setParameter("paramType", type);
+                result = ((Long) query.uniqueResult()).intValue();
+            } catch (Exception e) {
+                logger.error("Hibernate query error! " + e.getMessage());
+                return result;
+            } finally {
+                closeSession();
+            }
+        }
+        return result;
+    }    */
+
     @RequestMapping(value = "/cancel/department", method = RequestMethod.POST)
     public String cancelDepartment(ModelMap model) {
         return departments(model);
