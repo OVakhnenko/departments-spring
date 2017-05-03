@@ -96,6 +96,23 @@ public class EmployeeDao implements Dao<Employee> {
         return result;
     }
 
+    public List<Employee> list(Employee employee) {
+        Session session = this.sessionFactory.openSession();
+
+        Query query = session.createQuery("from Employee where department = :dept and age = :age and type = :type order by name");
+        query.setParameter("dept", employee.getDepartment());
+        query.setParameter("type", employee.getType());
+        query.setParameter("age", employee.getAge());
+        List<Employee> result = query.list();
+
+        session.close();
+
+        for (Employee emp : result) {
+            logger.info("Employee list: " + emp);
+        }
+        return result;
+    }
+
     @Override
     public List<Employee> fillDemoData() {
         return null;

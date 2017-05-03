@@ -12,10 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Repository("departmentDao")
 public class DepartmentDao implements Dao<Department> {
@@ -88,6 +85,19 @@ public class DepartmentDao implements Dao<Department> {
         session.close();
 
         for (Department department : result) {
+            logger.info("Department list: " + department);
+        }
+        return result;
+    }
+
+    public Map<Integer, String> map() {
+        Map<Integer, String> result = new LinkedHashMap<>();
+        Session session = this.sessionFactory.openSession();
+        List<Department> departments = session.createQuery("from Department order by name").list();
+        session.close();
+
+        for (Department department : departments) {
+            result.put(department.getDepartment_id(), department.getName());
             logger.info("Department list: " + department);
         }
         return result;

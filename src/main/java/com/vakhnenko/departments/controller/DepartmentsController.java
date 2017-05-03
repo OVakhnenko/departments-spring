@@ -20,7 +20,6 @@ import javax.validation.Valid;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -165,6 +164,29 @@ public class DepartmentsController {
         List<Department> departments = this.departmentService.list();
         model.addAttribute("listEmployees", this.employeeService.list(departments));
         return "all";
+    }
+
+    @RequestMapping(value = "/report/age")
+    public String reportAge(Model model) {
+        Department department = new Department();
+        Employee employee = new Employee();
+        employee.setDepartment(department);
+
+        model.addAttribute("typeEmployee", typeEmployee);
+        model.addAttribute("mapDepartments", this.departmentService.map());
+        model.addAttribute("employee", employee);
+        model.addAttribute("listEmployees", null);
+        return "age";
+    }
+
+    @RequestMapping(value = "/report/age/form")
+    public String reportAgeForm(@ModelAttribute("employee") Employee employee, Model model) {
+        employee.setDepartment(this.departmentService.getEssenceById(employee.getDepartment().getDepartment_id()));
+        model.addAttribute("listEmployees", this.employeeService.list(employee));
+        model.addAttribute("typeEmployee", typeEmployee);
+        model.addAttribute("mapDepartments", this.departmentService.map());
+        model.addAttribute("employee", employee);
+        return "age";
     }
 
     @RequestMapping(value = "/cancel/department", method = RequestMethod.POST)

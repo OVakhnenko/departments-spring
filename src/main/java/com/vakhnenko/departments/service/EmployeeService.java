@@ -43,6 +43,11 @@ public class EmployeeService {
     }
 
     @Transactional
+    public List<Employee> list(Employee employee) {
+        return employeeDao.list(employee);
+    }
+
+    @Transactional
     public List<Employee> list(List<Department> departments) {
         if (departments.size() > 0) {
             List<Employee> result = new ArrayList<>();
