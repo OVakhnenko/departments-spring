@@ -2,6 +2,7 @@ package com.vakhnenko.departments.service;
 
 import com.vakhnenko.departments.dao.DepartmentDao;
 import com.vakhnenko.departments.entity.Department;
+import com.vakhnenko.departments.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

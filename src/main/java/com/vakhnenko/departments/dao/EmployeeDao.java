@@ -69,6 +69,27 @@ public class EmployeeDao implements Dao<Employee> {
         return employee;
     }
 
+    public int getMaxEmployees(Employee employee) {
+        int result = 0;
+
+        if (openSession()) {
+            try {
+                Query query = session.createQuery("select count(*) from Employee where " +
+                        "department_name = :paramDepartmentName and " +
+                        "type = :paramType");
+                query.setParameter("paramDepartmentName", departmentName);
+                query.setParameter("paramType", type);
+                result = ((Long) query.uniqueResult()).intValue();
+            } catch (Exception e) {
+                logger.error("Hibernate query error! " + e.getMessage());
+                return result;
+            } finally {
+                closeSession();
+            }
+        }
+        return result;
+    }    */
+
     @Override
     public List<Employee> list() {
         Session session = this.sessionFactory.openSession();

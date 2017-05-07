@@ -196,33 +196,22 @@ public class DepartmentsController {
         employee.setDepartment(department);
 
         model.addAttribute("typeEmployee", typeEmployee);
-        model.addAttribute("mapDepartments", this.departmentService.map());
         model.addAttribute("employee", employee);
-        model.addAttribute("listEmployees", null);
+        model.addAttribute("topEmployees", "<empty>");
         return "top";
     }
 
-    /*
-    public int getMaxEmployees(String departmentName, String type) {
-        int result = 0;
+    @RequestMapping(value = "/report/top/form")
+    public String reportTopForm(Model model) {
+        Department department = new Department();
+        Employee employee = new Employee();
+        employee.setDepartment(department);
 
-        if (openSession()) {
-            try {
-                Query query = session.createQuery("select count(*) from Employee where " +
-                        "department_name = :paramDepartmentName and " +
-                        "type = :paramType");
-                query.setParameter("paramDepartmentName", departmentName);
-                query.setParameter("paramType", type);
-                result = ((Long) query.uniqueResult()).intValue();
-            } catch (Exception e) {
-                logger.error("Hibernate query error! " + e.getMessage());
-                return result;
-            } finally {
-                closeSession();
-            }
-        }
-        return result;
-    }    */
+        model.addAttribute("typeEmployee", typeEmployee);
+        model.addAttribute("employee", employee);
+        model.addAttribute("topEmployees", this.employeeService.getTopOfEmployees(employee));
+        return "top";
+    }
 
     @RequestMapping(value = "/cancel/department", method = RequestMethod.POST)
     public String cancelDepartment(ModelMap model) {
