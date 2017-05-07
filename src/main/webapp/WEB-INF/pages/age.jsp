@@ -54,7 +54,7 @@
             <tr>
                 <td>${tmpEmployee.name}</td>
                 <td>${tmpEmployee.age}</td>
-                <td>${tmpEmployee.type}</td>
+                <td>${tmpEmployee.typeString()}</td>
                 <td>${employee.department.name}</td>
             </tr>
         </c:forEach>

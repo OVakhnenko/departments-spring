@@ -64,25 +64,8 @@ public class EmployeeService {
         }
     }
 
-    private String getTypeOfEmployee(Employee employee) {
-        if ("D".equals(employee.getType())) {
-            return "Developer";
-        } else {
-            return "Manager";
-        }
-    }
-
     @Transactional
-    public String getTopOfEmployees(Employee employee) {
-        int topEmployees = 0;
-
-        List<Department>
-
-        if (topEmployees = employeeDao.getTopOfEmployees(Employee employee) > 0) {
-            return "Department " + employee.getDepartment().getName() + " has " +
-                    topEmployees + " " + getTypeOfEmployee(employee) + "('s)";
-        } else {
-            return "<empty>"
-        }
+    public int getCountOfEmployees(Employee employee) {
+        return employeeDao.getCountOfEmployees(employee);
     }
 }

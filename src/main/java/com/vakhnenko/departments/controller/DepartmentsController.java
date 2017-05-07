@@ -202,14 +202,33 @@ public class DepartmentsController {
     }
 
     @RequestMapping(value = "/report/top/form")
-    public String reportTopForm(Model model) {
-        Department department = new Department();
-        Employee employee = new Employee();
-        employee.setDepartment(department);
+    public String reportTopForm(@ModelAttribute("employee") Employee employee, Model model) {
+        int tmpEmployees;
+        int maxEmployees = 0;
+        String resultEmployees = "";
+        Department topDepartment = null;
+
+        List<Department> departments = this.departmentService.list();
+        for (Department department : departments) {
+            employee.setDepartment(department);
+            tmpEmployees = this.employeeService.getCountOfEmployees(employee);
+            if (tmpEmployees > maxEmployees) {
+                maxEmployees = tmpEmployees;
+                topDepartment = department;
+            }
+        }
+
+        if (maxEmployees > 0) {
+            resultEmployees = "Department \"" + topDepartment.getName() + "\" has " +
+                    maxEmployees + " " + employee.typeString() + "('s)";
+        } else {
+            resultEmployees = "<empty>";
+        }
 
         model.addAttribute("typeEmployee", typeEmployee);
         model.addAttribute("employee", employee);
-        model.addAttribute("topEmployees", this.employeeService.getTopOfEmployees(employee));
+        model.addAttribute("topEmployees", resultEmployees);
+
         return "top";
     }
 

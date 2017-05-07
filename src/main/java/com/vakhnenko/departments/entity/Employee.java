@@ -133,4 +133,12 @@ public class Employee implements Essence, java.io.Serializable {
     public String toString() {
         return "Employee { name=" + name + " id=" + employee_id + '}';
     }
+
+    public String typeString() {
+        if ("D".equals(type)) {
+            return "Developer";
+        } else {
+            return "Manager";
+        }
+    }
 }
