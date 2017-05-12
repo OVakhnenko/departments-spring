@@ -1,4 +1,4 @@
 package com.vakhnenko.departments.entity;
 
-public interface Essence {
+public interface Entity {
 }

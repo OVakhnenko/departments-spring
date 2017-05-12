@@ -28,8 +28,8 @@ public class EmployeeService {
     }
 
     @Transactional
-    public Employee getEssenceById(int id) {
-        return employeeDao.getEssenceById(id);
+    public Employee getById(int id) {
+        return employeeDao.getById(id);
     }
 
     @Transactional

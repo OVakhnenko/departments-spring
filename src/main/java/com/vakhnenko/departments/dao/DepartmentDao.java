@@ -64,7 +64,7 @@ public class DepartmentDao implements Dao<Department> {
     }
 
     @Override
-    public Department getEssenceById(int id) {
+    public Department getById(int id) {
         Session session = this.sessionFactory.openSession();
         Department department = (Department) session.get(Department.class, new Integer(id));
         session.close();

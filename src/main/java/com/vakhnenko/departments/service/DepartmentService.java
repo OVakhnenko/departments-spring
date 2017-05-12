@@ -32,8 +32,8 @@ public class DepartmentService {
     }
 
     @Transactional
-    public Department getEssenceById(int id) {
-        return departmentDao.getEssenceById(id);
+    public Department getById(int id) {
+        return departmentDao.getById(id);
     }
 
     @Transactional

@@ -19,7 +19,7 @@ import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "employee", catalog = "departments", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
-public class Employee implements Essence, java.io.Serializable {
+public class Employee implements com.vakhnenko.departments.entity.Entity, java.io.Serializable {
 
     private int employee_id;
     @Min(18)
@@ -32,7 +32,6 @@ public class Employee implements Essence, java.io.Serializable {
     private String language;
     private String methodology;
     private Department department;
-
 
     public Employee() {
     }

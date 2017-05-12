@@ -33,11 +33,9 @@ public class DepartmentsController {
     }
 
     @Autowired
-    @Qualifier("departmentService")
     private DepartmentService departmentService;
 
     @Autowired
-    @Qualifier("employeeService")
     private EmployeeService employeeService;
 
     @RequestMapping(value = "/add/department")
@@ -75,7 +73,7 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/department/{id}")
     public String employees(@PathVariable("id") int id, Model model) {
-        Department department = this.departmentService.getEssenceById(id);
+        Department department = this.departmentService.getById(id);
         Employee employee = new Employee();
         employee.setDepartment(department);
 
@@ -88,8 +86,8 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/department/{dID}/employee/{eID}", method = RequestMethod.GET)
     public String employees(@PathVariable("dID") int department_id, @PathVariable("eID") int employee_id, Model model) {
-        Department department = this.departmentService.getEssenceById(department_id);
-        Employee employee = this.employeeService.getEssenceById(employee_id);
+        Department department = this.departmentService.getById(department_id);
+        Employee employee = this.employeeService.getById(employee_id);
         employee.setDepartment(department);
 
         model.addAttribute("employee", employee);
@@ -99,15 +97,15 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/edit/department/{id}", method = RequestMethod.GET)
     public String editDepartment(@PathVariable("id") int id, Model model) {
-        model.addAttribute("department", this.departmentService.getEssenceById(id));
+        model.addAttribute("department", this.departmentService.getById(id));
         model.addAttribute("listDepartments", this.departmentService.list());
         return "departments";
     }
 
     @RequestMapping(value = "/edit/department/{dID}/employee/{eID}", method = RequestMethod.GET)
     public String editEmployee(@PathVariable("dID") int department_id, @PathVariable("eID") int employee_id, Model model) {
-        Department department = this.departmentService.getEssenceById(department_id);
-        Employee employee = this.employeeService.getEssenceById(employee_id);
+        Department department = this.departmentService.getById(department_id);
+        Employee employee = this.employeeService.getById(employee_id);
         employee.setDepartment(department);
 
         model.addAttribute("typeEmployee", typeEmployee);
@@ -127,7 +125,7 @@ public class DepartmentsController {
     public String removeEmployee(@PathVariable("eID") int employee_id, @PathVariable("dID") int department_id, Model model) {
         this.employeeService.remove(employee_id);
 
-        Department department = this.departmentService.getEssenceById(department_id);
+        Department department = this.departmentService.getById(department_id);
         Employee employee = new Employee();
         employee.setDepartment(department);
 
@@ -181,7 +179,7 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/report/age/form")
     public String reportAgeForm(@ModelAttribute("employee") Employee employee, Model model) {
-        employee.setDepartment(this.departmentService.getEssenceById(employee.getDepartment().getDepartment_id()));
+        employee.setDepartment(this.departmentService.getById(employee.getDepartment().getDepartment_id()));
         model.addAttribute("listEmployees", this.employeeService.list(employee));
         model.addAttribute("typeEmployee", typeEmployee);
         model.addAttribute("mapDepartments", this.departmentService.map());

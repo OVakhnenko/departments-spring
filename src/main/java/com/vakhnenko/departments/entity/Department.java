@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "department", catalog = "departments", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
-public class Department implements Essence, java.io.Serializable {
+public class Department implements com.vakhnenko.departments.entity.Entity, java.io.Serializable {
 
     private int department_id;
     @NotEmpty

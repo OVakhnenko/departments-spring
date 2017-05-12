@@ -55,7 +55,7 @@ public class EmployeeDao implements Dao<Employee> {
     }
 
     @Override
-    public Employee getEssenceById(int id) {
+    public Employee getById(int id) {
         Session session = this.sessionFactory.openSession();
         Employee employee = (Employee) session.get(Employee.class, new Integer(id));
         session.close();

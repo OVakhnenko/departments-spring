@@ -9,11 +9,6 @@
 	   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-    <!-- Register the properties-->
-    <bean id="propertyConfigurerApplication"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="/WEB-INF/properties/application.properties"/>
-
     <!-- Register the messages.properties-->
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="WEB-INF/properties/messages"/>
