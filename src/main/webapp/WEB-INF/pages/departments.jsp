@@ -36,6 +36,12 @@
 </head>
 
 <body>
+<div>
+    <a href="https://github.com/ovakhnenko/departments-spring" target="_blank">
+        <img src="/resources/github.png" width="50">
+    </a>
+</div>
+<br>
 <div class="alert alert-info" role="alert">List of Departments</div>
 
 <table class="table table-striped">
