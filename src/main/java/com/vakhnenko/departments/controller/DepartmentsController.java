@@ -4,9 +4,7 @@ import com.vakhnenko.departments.entity.Department;
 import com.vakhnenko.departments.entity.Employee;
 import com.vakhnenko.departments.service.DepartmentService;
 import com.vakhnenko.departments.service.EmployeeService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -232,7 +230,7 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/cancel/department", method = RequestMethod.POST)
     public String cancelDepartment(ModelMap model) {
-        return departments(model);
+        return "redirect:/departments";
     }
 
     @RequestMapping(value = "/departments")
@@ -240,10 +238,21 @@ public class DepartmentsController {
         return departments(model);
     }
 
+    @RequestMapping(value = "/public")
+    public String publicPage(Model model) {
+        return "public";
+    }
+
+    @RequestMapping(value = "/404")
+    public String notFound(Model model) {
+        return "404";
+    }
+
+    /*
     @RequestMapping(method = RequestMethod.GET)
     public String departments2(ModelMap model) {
         return departments(model);
-    }
+    }*/
 
     private String departments(ModelMap model) {
         model.addAttribute("listDepartments", this.departmentService.list());

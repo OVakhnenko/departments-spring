@@ -29,53 +29,68 @@
 </head>
 
 <body>
-<div class="alert alert-info" role="alert">Employee ${employee.name}</div>
-<table>
-    <c:url var="formAction" value="/department/${department.department_id}"/>
-    <form:form method="POST" commandName="employee" action="${formAction}">
-        <tr>
-            <td>Employee age: ${employee.age}</td>
-        </tr>
-        <c:if test="${employee.type eq 'D'}">
-            <tr>
-                <td>Employee type: Developer</td>
-            </tr>
-            <tr>
-                <td>Employee lang: ${employee.language}</td>
-            </tr>
-        </c:if>
-        <c:if test="${employee.type eq 'M'}">
-            <tr>
-                <td>Employee type: Manager</td>
-            </tr>
-            <tr>
-                <td>Employee meth: ${employee.methodology}</td>
-            </tr>
-        </c:if>
-        <tr>
-            <td>${employee.department.name}</td>
-        </tr>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit" class="btn btn-info">Employees</button>
-                <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
-            </td>
-        </tr>
-        <c:if test="${not empty actionMessage}">
-            <div class="alert alert-success">
-                <strong>Success!</strong> ${actionMessage}
-            </div>
-        </c:if>
-        <c:if test="${not empty actionError}">
-            <div class="alert alert-danger">
-                <strong>Error!</strong> ${actionError}
-            </div>
-        </c:if>
+<div class="container">
+    <h1>Departments</h1>
+
+    <!-- Header -->
+    <form:form method="POST" commandName="department" action="/login">
+        <jsp:include page="/resources/include/jsp/header.jsp"/>
     </form:form>
-</table>
+
+    <!-- Table of context -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">Employee</div>
+        <div class="panel-body">
+            <div class="alert alert-info" role="alert">Employee ${employee.name}</div>
+            <table>
+                <c:url var="formAction" value="/department/${department.department_id}"/>
+                <form:form method="POST" commandName="employee" action="${formAction}">
+                    <tr>
+                        <td>Employee age: ${employee.age}</td>
+                    </tr>
+                    <c:if test="${employee.type eq 'D'}">
+                        <tr>
+                            <td>Employee type: Developer</td>
+                        </tr>
+                        <tr>
+                            <td>Employee lang: ${employee.language}</td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${employee.type eq 'M'}">
+                        <tr>
+                            <td>Employee type: Manager</td>
+                        </tr>
+                        <tr>
+                            <td>Employee meth: ${employee.methodology}</td>
+                        </tr>
+                    </c:if>
+                    <tr>
+                        <td>${employee.department.name}</td>
+                    </tr>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" class="btn btn-info">Employees</button>
+                            <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
+                        </td>
+                    </tr>
+                    <c:if test="${not empty actionMessage}">
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> ${actionMessage}
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty actionError}">
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> ${actionError}
+                        </div>
+                    </c:if>
+                </form:form>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

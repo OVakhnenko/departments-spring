@@ -34,88 +34,102 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/resources/favicon.ico">
 </head>
-
 <body>
-<div class="alert alert-info" role="alert">List of employees whose age is ...</div>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Employee name</th>
-        <th>Employee age</th>
-        <th>Employee type</th>
-        <th>Deparment</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:if test="${empty listEmployees}">
-        <tr>
-            <td>&lt;empty&gt;</td>
-        </tr>
-    </c:if>
-    <c:if test="${!empty listEmployees}">
-        <c:forEach items="${listEmployees}" var="tmpEmployee">
-            <tr>
-                <td>${tmpEmployee.name}</td>
-                <td>${tmpEmployee.age}</td>
-                <td>${tmpEmployee.typeString()}</td>
-                <td>${employee.department.name}</td>
-            </tr>
-        </c:forEach>
-    </c:if>
-    </tbody>
-</table>
-<c:set var="employeeID" scope="session" value="${employee.employee_id}"/>
-<div class="alert alert-info" role="alert">Query parameters</div>
+<div class="container">
+    <h1>Departments</h1>
 
-<table>
-    <form:form method="POST" commandName="employee" action="/report/age/form">
-        <tr>
-            <td>
-                <label for="deptInput">Department:</label>
-                <form:select path="department.department_id" id="deptInput">
-                    <form:option value="-1" label="--- Select ---"/>
-                    <form:options items="${mapDepartments}"/>
-                </form:select>
-            </td>
-            <td><form:errors path="type" cssStyle="color: #ff0000;" element="div"></form:errors></td>
-        </tr>
-        <tr>
-            <td>
-                <label for="ageInput">Employee age:</label>
-                <form:input path="age" id="ageInput"></form:input>
-            </td>
-            <td><form:errors path="age" cssStyle="color: #ff0000;" element="div"></form:errors></td>
-        </tr>
-        <tr>
-            <td>
-                <label for="typeInput">Employee type:</label>
-                <form:select path="type" id="typeInput">
-                    <form:option value="NONE" label="--- Select ---"/>
-                    <form:options items="${typeEmployee}"/>
-                </form:select>
-            </td>
-            <td><form:errors path="type" cssStyle="color: #ff0000;" element="div"></form:errors></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit" class="btn btn-info">Generate report</button>
-                <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
-            </td>
-        </tr>
-        <c:if test="${not empty actionMessage}">
-            <div class="alert alert-success">
-                <strong>Success!</strong> ${actionMessage}
-            </div>
-        </c:if>
-        <c:if test="${not empty actionError}">
-            <div class="alert alert-danger">
-                <strong>Error!</strong> ${actionError}
-            </div>
-        </c:if>
+    <!-- Header -->
+    <form:form method="POST" commandName="department" action="/login">
+        <jsp:include page="/resources/include/jsp/header.jsp"/>
     </form:form>
-</table>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Age of emploees</div>
+        <div class="panel-body">
+
+            <div class="alert alert-info" role="alert">List of employees whose age is ...</div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Employee name</th>
+                    <th>Employee age</th>
+                    <th>Employee type</th>
+                    <th>Deparment</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:if test="${empty listEmployees}">
+                    <tr>
+                        <td>&lt;empty&gt;</td>
+                    </tr>
+                </c:if>
+                <c:if test="${!empty listEmployees}">
+                    <c:forEach items="${listEmployees}" var="tmpEmployee">
+                        <tr>
+                            <td>${tmpEmployee.name}</td>
+                            <td>${tmpEmployee.age}</td>
+                            <td>${tmpEmployee.typeString()}</td>
+                            <td>${employee.department.name}</td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
+                </tbody>
+            </table>
+            <c:set var="employeeID" scope="session" value="${employee.employee_id}"/>
+            <div class="alert alert-info" role="alert">Query parameters</div>
+
+            <table>
+                <form:form method="POST" commandName="employee" action="/report/age/form">
+                    <tr>
+                        <td>
+                            <label for="deptInput">Department:</label>
+                            <form:select path="department.department_id" id="deptInput">
+                                <form:option value="-1" label="--- Select ---"/>
+                                <form:options items="${mapDepartments}"/>
+                            </form:select>
+                        </td>
+                        <td><form:errors path="type" cssStyle="color: #ff0000;" element="div"></form:errors></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="ageInput">Employee age:</label>
+                            <form:input path="age" id="ageInput"></form:input>
+                        </td>
+                        <td><form:errors path="age" cssStyle="color: #ff0000;" element="div"></form:errors></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="typeInput">Employee type:</label>
+                            <form:select path="type" id="typeInput">
+                                <form:option value="NONE" label="--- Select ---"/>
+                                <form:options items="${typeEmployee}"/>
+                            </form:select>
+                        </td>
+                        <td><form:errors path="type" cssStyle="color: #ff0000;" element="div"></form:errors></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" class="btn btn-info">Generate report</button>
+                            <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
+                        </td>
+                    </tr>
+                    <c:if test="${not empty actionMessage}">
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> ${actionMessage}
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty actionError}">
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> ${actionError}
+                        </div>
+                    </c:if>
+                </form:form>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

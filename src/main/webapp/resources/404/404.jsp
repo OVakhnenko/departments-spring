@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Employees</title>
+    <title>Page not found</title>
 
     <style type="text/css">
         label {
@@ -38,41 +38,11 @@
 <body>
 <div class="container">
     <h1>Departments</h1>
-
-    <!-- Header -->
-    <form:form method="POST" commandName="department" action="/login">
-        <jsp:include page="/resources/include/jsp/header.jsp"/>
-    </form:form>
-
-    <!-- Table of context -->
-    <div class="panel panel-primary">
-        <div class="panel-heading">List of Employees</div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">Page not found</div>
         <div class="panel-body">
-            <div class="alert alert-info" role="alert">Top of employees</div>
-            <form:form method="POST" commandName="employee" action="/report/top/form">
-
-                Result: ${topEmployees}<br><br>
-                <label for="typeInput">Employee type:</label>
-
-                <form:select path="type" id="typeInput">
-                    <form:option value="NONE" label="--- Select ---"/>
-                    <form:options items="${typeEmployee}"/>
-                </form:select>
-                <br><br>
-
-                <button type="submit" class="btn btn-info">Generate report</button>
+            <form:form method="POST" commandName="department" action="/departments">
                 <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
-
-                <c:if test="${not empty actionMessage}">
-                    <div class="alert alert-success">
-                        <strong>Success!</strong> ${actionMessage}
-                    </div>
-                </c:if>
-                <c:if test="${not empty actionError}">
-                    <div class="alert alert-danger">
-                        <strong>Error!</strong> ${actionError}
-                    </div>
-                </c:if>
             </form:form>
         </div>
     </div>

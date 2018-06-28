@@ -36,49 +36,62 @@
 </head>
 
 <body>
-<div class="alert alert-info" role="alert">List of all employees</div>
+<div class="container">
+    <h1>Departments</h1>
 
-<table class="table table-striped">
-    <form:form method="POST" commandName="employee" action="/departments">
-        <thead>
-        <tr>
-            <th>Department</th>
-            <th>Employee</th>
-            <th>Age</th>
-            <th>Type</th>
-            <th>Spec</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:if test="${empty listEmployees}">
-            <tr>
-                <td>&lt;empty&gt;</td>
-            </tr>
-        </c:if>
-        <c:if test="${!empty listEmployees}">
-            <c:forEach items="${listEmployees}" var="tmpEmployee">
-                <tr>
-                    <td>${tmpEmployee.department.name}</td>
-                    <td>${tmpEmployee.name}</td>
-                    <td>${tmpEmployee.age}</td>
-                    <c:if test="${tmpEmployee.type eq 'D'}">
-                        <td>Developer</td>
-                        <td>${tmpEmployee.language}</td>
-                    </c:if>
-                    <c:if test="${tmpEmployee.type eq 'M'}">
-                        <td>Manager</td>
-                        <td>${tmpEmployee.methodology}</td>
-                    </c:if>
-                </tr>
-            </c:forEach>
-        </c:if>
-        <tr>
-            <td>
-                <button type="submit" class="btn btn-info">Departments</button>
-            </td>
-        </tr>
-        </tbody>
+    <!-- Header -->
+    <form:form method="POST" commandName="department" action="/login">
+        <jsp:include page="/resources/include/jsp/header.jsp"/>
     </form:form>
-</table>
+
+    <!-- Table of context -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">All emploees</div>
+        <div class="panel-body">
+
+
+            <div class="alert alert-info" role="alert">List of all employees</div>
+
+            <form:form method="POST" commandName="employee" action="/departments">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Employee</th>
+                        <th>Age</th>
+                        <th>Type</th>
+                        <th>Spec</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:if test="${empty listEmployees}">
+                        <tr>
+                            <td>&lt;empty&gt;</td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${!empty listEmployees}">
+                        <c:forEach items="${listEmployees}" var="tmpEmployee">
+                            <tr>
+                                <td>${tmpEmployee.department.name}</td>
+                                <td>${tmpEmployee.name}</td>
+                                <td>${tmpEmployee.age}</td>
+                                <c:if test="${tmpEmployee.type eq 'D'}">
+                                    <td>Developer</td>
+                                    <td>${tmpEmployee.language}</td>
+                                </c:if>
+                                <c:if test="${tmpEmployee.type eq 'M'}">
+                                    <td>Manager</td>
+                                    <td>${tmpEmployee.methodology}</td>
+                                </c:if>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-info">Departments</button>
+            </form:form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

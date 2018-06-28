@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Employees</title>
+    <title>Page not found</title>
 
     <style type="text/css">
         label {
@@ -46,33 +46,13 @@
 
     <!-- Table of context -->
     <div class="panel panel-primary">
-        <div class="panel-heading">List of Employees</div>
+        <div class="panel-heading">Public page</div>
         <div class="panel-body">
-            <div class="alert alert-info" role="alert">Top of employees</div>
-            <form:form method="POST" commandName="employee" action="/report/top/form">
+            <div class="alert alert-info" role="alert">This is public information. Does not require authorized access.
+            </div>
 
-                Result: ${topEmployees}<br><br>
-                <label for="typeInput">Employee type:</label>
-
-                <form:select path="type" id="typeInput">
-                    <form:option value="NONE" label="--- Select ---"/>
-                    <form:options items="${typeEmployee}"/>
-                </form:select>
-                <br><br>
-
-                <button type="submit" class="btn btn-info">Generate report</button>
+            <form:form method="POST" commandName="department" action="/departments">
                 <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
-
-                <c:if test="${not empty actionMessage}">
-                    <div class="alert alert-success">
-                        <strong>Success!</strong> ${actionMessage}
-                    </div>
-                </c:if>
-                <c:if test="${not empty actionError}">
-                    <div class="alert alert-danger">
-                        <strong>Error!</strong> ${actionError}
-                    </div>
-                </c:if>
             </form:form>
         </div>
     </div>

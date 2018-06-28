@@ -36,98 +36,134 @@
 </head>
 
 <body>
-<div>
-    <a href="https://github.com/ovakhnenko/departments-spring" target="_blank">
-        <img src="/resources/github.png" width="50">
-    </a>
-</div>
-<br>
-<div class="alert alert-info" role="alert">List of Departments</div>
+<div class="container">
+    <h1>Departments</h1>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th width="60">Edit</th>
-        <th width="60">Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:if test="${empty listDepartments}">
-        <tr>
-            <td>&lt;empty&gt;</td>
-        </tr>
-    </c:if>
-    <c:if test="${!empty listDepartments}">
-        <c:forEach items="${listDepartments}" var="department">
-            <tr>
-                <td><a href="/department/${department.department_id}">${department.name}</a></td>
-                <td><a href="<c:url value='/edit/department/${department.department_id}'/>"><span
-                        class="glyphicon glyphicon-edit"></span></a></td>
-                <td><a href="<c:url value='/remove/department/${department.department_id}'/>"><span
-                        class="glyphicon glyphicon-remove-sign"></span></a></td>
-            </tr>
-        </c:forEach>
-    </c:if>
-    </tbody>
-</table>
-
-<c:if test="${department.department_id == 0}">
-    <div class="alert alert-info" role="alert">New Department</div>
-</c:if>
-<c:if test="${department.department_id > 0}">
-    <div class="alert alert-info" role="alert">Edit Department</div>
-</c:if>
-
-<table>
-    <form:form method="POST" commandName="department" action="/add/department">
-        <c:if test="${department.department_id > 0}">
-            <tr>
-                <td>
-                    <label for="idInput">id:</label>
-                    <form:input path="department_id" id="idInput" readonly="true" disabled="true"></form:input>
-                    <form:hidden path="department_id"/>
-                </td>
-            </tr>
-            <tr>
-        </c:if>
-        <tr>
-            <td>
-                <label for="nameInput">Name:</label>
-                <form:input path="name" id="nameInput"></form:input>
-            </td>
-            <td><form:errors path="name" cssStyle="color: #ff0000;" element="div"></form:errors></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td>
-                <c:if test="${department.department_id == 0}">
-                    <button type="submit" class="btn btn-info">Add department</button>
-                    <button formaction="/demonstration" type="submit" class="btn btn-info">Demonstration data</button>
-                    <button formaction="/delete/all" type="submit" class="btn btn-info">Delete all data</button>
-                </c:if>
-                <c:if test="${department.department_id > 0}">
-                    <button type="submit" class="btn btn-info">Update</button>
-                    <button formaction="/cancel/department" type="submit" class="btn btn-info">Cancel</button>
-                </c:if>
-                <div class="btn-group">
-                    <button type="submit" formaction="/report/all" class="btn btn-primary">All</button>
-                    <button type="submit" formaction="/report/age" class="btn btn-primary">Age</button>
-                    <button type="submit" formaction="/report/top" class="btn btn-primary">Top</button>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
-        <c:if test="${not empty actionMessage}">
-            <div class="alert alert-success">
-                <strong>Success!</strong> ${actionMessage}
-            </div>
-        </c:if>
+    <!-- Header -->
+    <form:form method="POST" commandName="department" action="/login">
+        <jsp:include page="/resources/include/jsp/header.jsp"/>
     </form:form>
-</table>
+
+    <!-- Table of context -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">List of Departments</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th width="60">Edit</th>
+                    <th width="60">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:if test="${empty listDepartments}">
+                    <tr>
+                        <td>&lt;empty&gt;</td>
+                    </tr>
+                </c:if>
+                <c:if test="${!empty listDepartments}">
+                    <c:forEach items="${listDepartments}" var="department">
+                        <tr>
+                            <td><a href="/department/${department.department_id}">${department.name}</a></td>
+                            <td><a href="<c:url value='/edit/department/${department.department_id}'/>"><span
+                                    class="glyphicon glyphicon-edit"></span></a></td>
+                            <td><a href="<c:url value='/remove/department/${department.department_id}'/>"><span
+                                    class="glyphicon glyphicon-remove-sign"></span></a></td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add/Edit department -->
+    <div class="panel panel-primary">
+        <c:if test="${department.department_id == 0}">
+            <div class="panel-heading">New Department</div>
+        </c:if>
+        <c:if test="${department.department_id > 0}">
+            <div class="panel-heading">Edit Department</div>
+        </c:if>
+        <div class="panel-body">
+            <table>
+                <form:form method="POST" commandName="department" action="/add/department">
+                    <c:if test="${department.department_id > 0}">
+                        <tr>
+                            <td>
+                                <label for="idInput">id:</label>
+                                <form:input path="department_id" id="idInput" readonly="true"
+                                            disabled="true"></form:input>
+                                <form:hidden path="department_id"/>
+                            </td>
+                        </tr>
+                        <tr>
+                    </c:if>
+                    <tr>
+                        <td>
+                            <label for="nameInput">Name:</label>
+                            <form:input path="name" id="nameInput"></form:input>
+                        </td>
+                        <td><form:errors path="name" cssStyle="color: #ff0000;" element="div"></form:errors></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <c:if test="${department.department_id == 0}">
+                                <button type="submit" class="btn btn-info">Add department</button>
+                                <button formaction="/demonstration" type="submit" class="btn btn-info">Demonstration
+                                    data
+                                </button>
+                                <button formaction="/delete/all" type="submit" class="btn btn-info">Delete all data
+                                </button>
+                            </c:if>
+                            <c:if test="${department.department_id > 0}">
+                                <button type="submit" class="btn btn-info">Update</button>
+                                <button formaction="/cancel/department" type="submit" class="btn btn-info">Cancel
+                                </button>
+                            </c:if>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <c:if test="${not empty actionMessage}">
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> ${actionMessage}
+                        </div>
+                    </c:if>
+                </form:form>
+            </table>
+        </div>
+    </div>
+
+    <!-- Authorized access -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">Authorized access</div>
+        <div class="panel-body">
+            <form:form method="POST" commandName="department" action="/report/all">
+                <button formaction="/public" type="submit" class="btn btn-info">Public page</button>
+                <button formaction="/autorized/user" type="submit" class="btn btn-info">User page</button>
+                <button formaction="/autorized/admin" type="submit" class="btn btn-info">Admin page</button>
+                <button formaction="/login" type="submit" class="btn btn-info">&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            </form:form>
+        </div>
+    </div>
+
+    <!-- Reports -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">Reports</div>
+        <div class="panel-body">
+            <form:form method="POST" commandName="department" action="/report/all">
+                <button formaction="/report/all" type="submit" class="btn btn-info">All employees</button>
+                <button formaction="/report/age" type="submit" class="btn btn-info">Age of employees</button>
+                <button formaction="/report/top" type="submit" class="btn btn-info">Top of employees</button>
+            </form:form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
