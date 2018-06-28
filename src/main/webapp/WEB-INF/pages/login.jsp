@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Public page</title>
+    <title>Page not found</title>
 
     <style type="text/css">
         label {
@@ -38,22 +38,23 @@
 <body>
 <div class="container">
     <h1>Departments</h1>
-
-    <!-- Header -->
-    <form:form method="POST" commandName="department" action="/login">
-        <jsp:include page="/resources/include/jsp/header.jsp"/>
-    </form:form>
-
-    <!-- Table of context -->
-    <div class="panel panel-primary">
-        <div class="panel-heading">Public page</div>
+    <div class="panel panel-danger">
         <div class="panel-body">
-            <div class="alert alert-info" role="alert">This is public information. Does not require authorized access.
-            </div>
-
-            <form:form method="POST" commandName="department" action="/departments">
-                <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
-            </form:form>
+            <c:url value="/j_spring_security_check" var="loginUrl"/>
+            <form action="${loginUrl}" method="post">
+                <div class="alert alert-info" role="alert">Please sign in (user/user or admin/admin)</div>
+                <input type="text" class="form-control" name="j_username" placeholder="Email address" required autofocus
+                       value="user">
+                <input type="password" class="form-control" name="j_password" placeholder="Password" required
+                       value="user">
+                <br>
+                <button class="btn btn-primary" type="submit">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </button>
+                <button formaction="/departments" class="btn btn-primary">
+                    &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
+                </button>
+            </form>
         </div>
     </div>
 </div>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -148,7 +149,13 @@
                 <button formaction="/public" type="submit" class="btn btn-info">Public page</button>
                 <button formaction="/autorized/user" type="submit" class="btn btn-info">User page</button>
                 <button formaction="/autorized/admin" type="submit" class="btn btn-info">Admin page</button>
-                <button formaction="/login" type="submit" class="btn btn-info">&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                <sec:authorize var="loggedIn" access="isAuthenticated()"/>
+                <c:if test="${not loggedIn}">
+                    <button formaction="/login" type="submit" class="btn btn-info">&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                </c:if>
+                <c:if test="${loggedIn}">
+                    <button formaction="/logout" type="submit" class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;Logout&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                </c:if>
             </form:form>
         </div>
     </div>

@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Page not found</title>
+    <title>403</title>
 
     <style type="text/css">
         label {
@@ -39,8 +39,11 @@
 <div class="container">
     <h1>Departments</h1>
     <div class="panel panel-danger">
-        <div class="panel-heading">Page not found</div>
+        <div class="panel-heading">403</div>
         <div class="panel-body">
+            Forbidden error
+            <br>
+            <br>
             <form:form method="POST" commandName="department" action="/departments">
                 <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
             </form:form>

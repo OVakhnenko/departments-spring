@@ -245,7 +245,12 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/404")
     public String notFound(Model model) {
-        return "404";
+        return "40x";
+    }
+
+    @RequestMapping(value = "/login")
+    public String login(Model model) {
+        return "login";
     }
 
     /*

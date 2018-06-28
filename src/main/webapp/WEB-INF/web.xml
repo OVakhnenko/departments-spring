@@ -28,6 +28,10 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/resources/404/404.jsp</location>
+        <location>/resources/40x/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/resources/40x/403.jsp</location>
     </error-page>
 </web-app>

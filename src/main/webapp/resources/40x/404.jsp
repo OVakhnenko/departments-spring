@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Public page</title>
+    <title>404</title>
 
     <style type="text/css">
         label {
@@ -38,19 +38,12 @@
 <body>
 <div class="container">
     <h1>Departments</h1>
-
-    <!-- Header -->
-    <form:form method="POST" commandName="department" action="/login">
-        <jsp:include page="/resources/include/jsp/header.jsp"/>
-    </form:form>
-
-    <!-- Table of context -->
-    <div class="panel panel-primary">
-        <div class="panel-heading">Public page</div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">404</div>
         <div class="panel-body">
-            <div class="alert alert-info" role="alert">This is public information. Does not require authorized access.
-            </div>
-
+            Page not found error
+            <br>
+            <br>
             <form:form method="POST" commandName="department" action="/departments">
                 <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
             </form:form>
