@@ -41,8 +41,8 @@
     <h1>Departments</h1>
 
     <!-- Header -->
-    <form:form method="POST" commandName="department" action="/login">
-        <jsp:include page="/resources/include/jsp/header.jsp"/>
+    <form:form method="get" commandName="department" action="/login">
+        <jsp:include page="header.jsp"/>
     </form:form>
 
     <!-- Table of context -->
@@ -145,10 +145,10 @@
     <div class="panel panel-primary">
         <div class="panel-heading">Authorized access</div>
         <div class="panel-body">
-            <form:form method="POST" commandName="department" action="/report/all">
+            <form:form method="get" commandName="department" action="/report/all">
                 <button formaction="/public" type="submit" class="btn btn-info">Public page</button>
-                <button formaction="/autorized/user" type="submit" class="btn btn-info">User page</button>
-                <button formaction="/autorized/admin" type="submit" class="btn btn-info">Admin page</button>
+                <button formaction="/authorized/user" type="submit" class="btn btn-info">User page</button>
+                <button formaction="/authorized/admin" type="submit" class="btn btn-info">Admin page</button>
                 <sec:authorize var="loggedIn" access="isAuthenticated()"/>
                 <c:if test="${not loggedIn}">
                     <button formaction="/login" type="submit" class="btn btn-info">&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;</button>

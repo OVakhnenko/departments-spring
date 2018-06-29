@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Public page</title>
+    <title>Authorized user page</title>
 
     <style type="text/css">
         label {
@@ -46,9 +46,9 @@
 
     <!-- Table of context -->
     <div class="panel panel-primary">
-        <div class="panel-heading">Public page</div>
+        <div class="panel-heading">Authorized user page</div>
         <div class="panel-body">
-            <div class="alert alert-info" role="alert">This is public information. Does not require authorized access.
+            <div class="alert alert-success" role="alert">This is the page for the authorized user.
             </div>
 
             <form:form method="POST" commandName="department" action="/departments">

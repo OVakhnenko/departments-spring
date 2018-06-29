@@ -39,8 +39,8 @@
     <h1>Departments</h1>
 
     <!-- Header -->
-    <form:form method="POST" commandName="department" action="/login">
-        <jsp:include page="/resources/include/jsp/header.jsp"/>
+    <form:form method="get" commandName="department" action="/login">
+        <jsp:include page="header.jsp"/>
     </form:form>
 
     <!-- Table of context -->

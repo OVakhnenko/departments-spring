@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login</title>
+    <title>Registraion</title>
 
     <style type="text/css">
         label {
@@ -40,30 +40,39 @@
     <h1>Departments</h1>
     <div class="panel panel-danger">
         <div class="panel-body">
-            <form action="/login" method="post" class="form-signin">
-                <div class="alert alert-info" role="alert">Please sign in (user/user or admin/admin)</div>
+            <form:form action="/registration" method="post" modelAttribute="userForm">
+                <div class="alert alert-info" role="alert">New user account</div>
+                <spring:bind path="username">
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                        <form:input type="text" path="username" class="form-control" placeholder="Username"
+                                    autofocus="true"></form:input>
+                        <form:errors path="username" cssStyle="color: red"></form:errors>
+                    </div>
+                </spring:bind>
 
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input id="username" type="text" class="form-control" name="username" placeholder="Username"
-                           autofocus="true" required value="user"/>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Password"
-                           required
-                           value="user">
-                    <span style="color: red">${error}</span>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                </div>
+                <spring:bind path="password">
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                        <form:input type="password" path="password" class="form-control"
+                                    placeholder="Password"></form:input>
+                        <form:errors path="password" cssStyle="color: red"></form:errors>
+                    </div>
+                </spring:bind>
 
-                <button class="btn btn-primary" type="submit" method="post">
+                <spring:bind path="confirmPassword">
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                        <form:input type="password" path="confirmPassword" class="form-control"
+                                    placeholder="Confirm your password"></form:input>
+                        <form:errors path="confirmPassword" cssStyle="color: red"></form:errors>
+                    </div>
+                </spring:bind>
+
+                <button class="btn btn-primary" type="submit">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </button>
                 <button formaction="/departments" class="btn btn-primary">
                     &nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;
                 </button>
-            </form>
+            </form:form>
         </div>
     </div>
 </div>
