@@ -3,7 +3,6 @@ package com.vakhnenko.departments.service;
 import com.vakhnenko.departments.dao.EmployeeDao;
 import com.vakhnenko.departments.entity.Department;
 import com.vakhnenko.departments.entity.Employee;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,37 +16,37 @@ public class EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public void save(Employee employee) {
         employeeDao.save(employee);
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public void remove(int id) {
         employeeDao.remove(id);
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public Employee getById(int id) {
         return employeeDao.getById(id);
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public List<Employee> list() {
         return employeeDao.list();
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public List<Employee> list(Department department) {
         return employeeDao.list(department);
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public List<Employee> list(Employee employee) {
         return employeeDao.list(employee);
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public List<Employee> list(List<Department> departments) {
         if (departments.size() > 0) {
             List<Employee> result = new ArrayList<>();
@@ -64,7 +63,7 @@ public class EmployeeService {
         }
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public int getCountOfEmployees(Employee employee) {
         return employeeDao.getCountOfEmployees(employee);
     }

@@ -27,9 +27,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+        Set<User> users = new HashSet<>();
+        users.add(user);
+
+        Role role = new Role();
+        role.setId(Constants.ROLE_USER);
+        role.setName("ROLE_USER");
+        role.setUsers(users);
+
         Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.getOne(Constants.ROLE_USER)); // set role USER for all new users;
+        roles.add(role); // set role USER for all new users;
         user.setRoles(roles);
+
         userDao.save(user);
     }
 

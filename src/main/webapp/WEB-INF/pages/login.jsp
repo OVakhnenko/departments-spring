@@ -51,8 +51,7 @@
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input id="password" type="password" class="form-control" name="password" placeholder="Password"
-                           required
-                           value="user">
+                           required value="user">
                     <span style="color: red">${error}</span>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </div>

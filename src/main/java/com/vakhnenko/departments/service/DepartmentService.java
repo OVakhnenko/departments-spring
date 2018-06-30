@@ -2,7 +2,6 @@ package com.vakhnenko.departments.service;
 
 import com.vakhnenko.departments.dao.DepartmentDao;
 import com.vakhnenko.departments.entity.Department;
-import com.vakhnenko.departments.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,37 +15,37 @@ public class DepartmentService {
     @Autowired
     private DepartmentDao departmentDao;
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public void save(Department department) {
         departmentDao.save(department);
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public void remove(int id) {
         departmentDao.remove(id);
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public void deleteAll() {
         departmentDao.deleteAll();
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public Department getById(int id) {
         return departmentDao.getById(id);
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public List<Department> list() {
         return departmentDao.list();
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public Map<Integer, String> map() {
         return departmentDao.map();
     }
 
-    @Transactional
+    @Transactional(value = "transactionManagerHibernate")
     public List<Department> fillDemoData() {
         return departmentDao.fillDemoData();
     }
