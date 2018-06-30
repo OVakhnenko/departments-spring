@@ -4,14 +4,22 @@ CREATE TABLE users (
   username VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL
 )
-  ENGINE = InnoDB;
+  ENGINE = InnoDB
+  CHARACTER SET utf8
+  COLLATE utf8_general_ci
+  DEFAULT CHARSET = utf8;
+;
 
 -- Table: roles
 CREATE TABLE roles (
   id   INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL
 )
-  ENGINE = InnoDB;
+  ENGINE = InnoDB
+  CHARACTER SET utf8
+  COLLATE utf8_general_ci
+  DEFAULT CHARSET = utf8;
+;
 
 -- Table for mapping user and roles: user_roles
 CREATE TABLE user_roles (
@@ -23,7 +31,11 @@ CREATE TABLE user_roles (
 
   UNIQUE (user_id, role_id)
 )
-  ENGINE = InnoDB;
+  ENGINE = InnoDB
+  CHARACTER SET utf8
+  COLLATE utf8_general_ci
+  DEFAULT CHARSET = utf8;
+;
 
 -- Insert data
 

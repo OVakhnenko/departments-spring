@@ -41,7 +41,8 @@
     <div class="panel panel-danger">
         <div class="panel-body">
             <form action="/login" method="post" class="form-signin">
-                <div class="alert alert-info" role="alert">Please sign in (user/user or admin/admin)</div>
+                <div class="alert alert-info" role="alert">Please sign in (user/user or admin/admin) or
+                    <a href="/registration">sign out</a></div>
 
                 <div class="form-group">
                     <label for="username">Username</label>
