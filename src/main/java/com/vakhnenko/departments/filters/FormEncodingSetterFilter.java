@@ -3,6 +3,7 @@ package com.vakhnenko.departments.filters;
 import javax.servlet.*;
 import java.io.IOException;
 
+// http://www.skipy.ru/technics/encodings_webapp.html
 public class FormEncodingSetterFilter implements Filter {
 
     private static final String FILTERABLE_CONTENT_TYPE = "application/x-www-form-urlencoded";
