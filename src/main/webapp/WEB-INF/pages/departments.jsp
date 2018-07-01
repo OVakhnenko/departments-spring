@@ -162,7 +162,7 @@
 
     <!-- Reports -->
     <div class="panel panel-primary">
-        <div class="panel-heading">Reports</div>
+        <div class="panel-heading">Public reports</div>
         <div class="panel-body">
             <form:form method="POST" commandName="department" action="/report/all">
                 <button formaction="/report/all" type="submit" class="btn btn-info">All employees</button>

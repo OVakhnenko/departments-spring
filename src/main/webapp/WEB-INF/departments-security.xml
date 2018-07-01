@@ -7,7 +7,15 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <!-- https://ru.wikibooks.org/wiki/Spring_Security/Конфигурирование_с_помощью_пространства_имён -->
     <http auto-config="true">
+        <intercept-url pattern="/delete/all" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/demonstration" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+
+        <intercept-url pattern="/add/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/edit/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/remove/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+
         <intercept-url pattern="/authorized/user" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/authorized/admin" access="hasAnyRole('ROLE_ADMIN')"/>
 

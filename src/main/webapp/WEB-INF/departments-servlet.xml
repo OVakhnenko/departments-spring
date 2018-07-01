@@ -12,6 +12,13 @@
         <property name="basename" value="WEB-INF/properties/messages"/>
     </bean>
 
+    <!-- Application Properties -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>/WEB-INF/properties/application.properties</value>
+        </property>
+    </bean>
+
     <!-- Register jsp directory -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
