@@ -39,7 +39,7 @@
 <body>
 <div class="container">
     <h1>Departments</h1>
-    <div class="panel panel-danger">
+    <div class="panel panel-primary">
         <div class="panel-body">
             <form:form action="/registration" method="post" modelAttribute="userForm">
                 <div class="alert alert-info" role="alert">New user account</div>

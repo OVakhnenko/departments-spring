@@ -257,6 +257,11 @@ public class DepartmentsController {
         return departments(model);
     }
 
+    @RequestMapping(value = "/departments_forward")
+    public String departments21(ModelMap model) {
+        return "forward:/departments";
+    }
+
     @RequestMapping(value = "/public")
     public String publicPage(Model model) {
         return "public";
@@ -264,6 +269,9 @@ public class DepartmentsController {
 
     @RequestMapping(value = "authorized/user")
     public String userPage(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        model.addAttribute("userName", userName);
         return "authorized.user";
     }
 
@@ -284,6 +292,7 @@ public class DepartmentsController {
                 return "departments";
             }
         }
+
         return "login";
     }
 

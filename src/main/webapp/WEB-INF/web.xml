@@ -19,7 +19,7 @@
 
     <!-- Filters -->
     <!-- Encoding! MUST BE FIRST!! -->
-    <!-- http://www.skipy.ru/technics/encodings_webapp.html -->
+    <!-- http://www.skipy.ru/technics/encodings_webapp.html-->
     <filter>
         <filter-name>FormEncodingSetterFilter</filter-name>
         <filter-class>com.vakhnenko.departments.filters.FormEncodingSetterFilter</filter-class>

@@ -47,7 +47,7 @@
 
     <!-- Table of context -->
     <div class="panel panel-primary">
-        <div class="panel-heading">Authorized user page</div>
+        <div class="panel-heading">Authorized user page for "${userName}"</div>
         <div class="panel-body">
             <div class="alert alert-success" role="alert">This is the page for the authorized user.
             </div>

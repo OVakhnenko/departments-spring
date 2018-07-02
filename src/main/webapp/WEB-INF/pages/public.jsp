@@ -53,6 +53,9 @@
             </div>
 
             <form:form method="POST" commandName="department" action="/departments">
+                <button formaction="/report/all" type="submit" class="btn btn-info">All employees</button>
+                <button formaction="/report/age" type="submit" class="btn btn-info">Age of employees</button>
+                <button formaction="/report/top" type="submit" class="btn btn-info">Top of employees</button>
                 <button formaction="/departments" type="submit" class="btn btn-info">Departments</button>
             </form:form>
         </div>
