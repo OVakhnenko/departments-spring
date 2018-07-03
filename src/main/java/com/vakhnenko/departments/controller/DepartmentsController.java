@@ -324,8 +324,24 @@ public class DepartmentsController {
         user.setPassword("");
         user.setConfirmPassword("");
         model.addAttribute("user", user);
+        model.addAttribute("userName", user.getUsername());
 
         return "authorized.admin.change.user";
+    }
+
+    @RequestMapping(value = "/authorized/admin/change/user", method = RequestMethod.POST)
+    public String changeUser(@ModelAttribute("user") User user, @ModelAttribute("userName") String userName,
+                             BindingResult bindingResult, Model model) {
+        passwordValidator.validate(user, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "authorized.admin.change.user";
+        }
+        User editedUser = userService.findByUsername(userName);
+        editedUser.setPassword(user.getConfirmPassword());
+        userService.save(editedUser);
+
+        return "authorized.admin";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
