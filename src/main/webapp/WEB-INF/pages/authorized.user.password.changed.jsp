@@ -40,37 +40,14 @@
 <div class="container">
     <h1>Departments</h1>
 
-    <!-- Header -->
-    <form:form method="get" action="/login">
-        <jsp:include page="header.jsp"/>
-    </form:form>
-
     <!-- Table of context -->
-    <form:form action="/authorized/user" method="post" modelAttribute="loggedUser">
+    <form:form method="get" action="/departments" modelAttribute="loggedUser">
         <div class="panel panel-primary">
             <div class="panel-heading">Authorized user page for "${loggedUser.username}".</div>
             <div class="panel-body">
-                <div class="alert alert-success" role="alert">This is the page for the authorized user.
-                    You can change the password:
-                </div>
+                <div class="alert alert-success" role="alert">Password was successfully changed.</div>
 
-                <spring:bind path="password">
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="password" path="password" class="form-control"
-                                    placeholder="Password" autofocus="true"></form:input>
-                        <form:errors path="password" cssStyle="color: red"></form:errors>
-                    </div>
-                </spring:bind>
-                <spring:bind path="confirmPassword">
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="password" path="confirmPassword" class="form-control"
-                                    placeholder="Confirm your password"></form:input>
-                        <form:errors path="confirmPassword" cssStyle="color: red"></form:errors>
-                    </div>
-                </spring:bind>
-
-                <button type="submit" class="btn btn-info">Change password</button>
-                <button formaction="/departments" class="btn btn-info">Departments</button>
+                <button class="btn btn-info">Departments</button>
             </div>
         </div>
     </form:form>

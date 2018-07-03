@@ -7,6 +7,7 @@ import com.vakhnenko.departments.service.DepartmentService;
 import com.vakhnenko.departments.service.EmployeeService;
 import com.vakhnenko.departments.service.SecurityService;
 import com.vakhnenko.departments.service.UserService;
+import com.vakhnenko.departments.validator.PasswordValidator;
 import com.vakhnenko.departments.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -51,6 +52,9 @@ public class DepartmentsController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private PasswordValidator passwordValidator;
 
     @Autowired
     private UserService userService;
@@ -267,12 +271,41 @@ public class DepartmentsController {
         return "public";
     }
 
-    @RequestMapping(value = "authorized/user")
+    @RequestMapping(value = "/authorized/user", method = RequestMethod.GET)
     public String userPage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
-        model.addAttribute("userName", userName);
+
+        User user = new User();
+        user.setUsername(userName);
+        model.addAttribute("loggedUser", user);
         return "authorized.user";
+    }
+
+    @RequestMapping(value = "/authorized/user", method = RequestMethod.POST)
+    public String userPage(@ModelAttribute("loggedUser") User loggedUser, BindingResult bindingResult,
+                           HttpServletRequest request, HttpServletResponse response, Model model) {
+        passwordValidator.validate(loggedUser, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "authorized.user";
+        }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
+            String userName = auth.getName();
+            User savedUser = userService.findByUsername(userName);
+
+            loggedUser.setId(savedUser.getId());
+            loggedUser.setUsername(savedUser.getUsername());
+            loggedUser.setRoles(savedUser.getRoles());
+
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+            userService.save(loggedUser);
+            securityService.autoLogin(loggedUser.getUsername(), loggedUser.getConfirmPassword());
+
+            model.addAttribute("loggedUser", loggedUser);
+        }
+        return "authorized.user.password.changed";
     }
 
     @RequestMapping(value = "/authorized/admin")
