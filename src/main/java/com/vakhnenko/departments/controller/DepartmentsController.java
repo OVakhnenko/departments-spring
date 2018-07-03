@@ -310,7 +310,22 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/authorized/admin")
     public String adminPage(Model model) {
+        List<User> users = userService.getAll();
+        model.addAttribute("users", users);
+        model.addAttribute("user", new User());
+
         return "authorized.admin";
+    }
+
+    @RequestMapping(value = "/authorized/admin/change/user/{userId}", method = RequestMethod.GET)
+    public String changeUser(@PathVariable("userId") long userId, Model model) {
+
+        User user = userService.getOne(userId);
+        user.setPassword("");
+        user.setConfirmPassword("");
+        model.addAttribute("user", user);
+
+        return "authorized.admin.change.user";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

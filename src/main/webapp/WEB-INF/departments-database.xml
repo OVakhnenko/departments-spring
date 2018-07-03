@@ -52,7 +52,6 @@
         </property>
     </bean>
 
-    <!-- Default Transaction -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="transactionManager"
