@@ -54,22 +54,33 @@
                     You can change the password:
                 </div>
 
-                <spring:bind path="password">
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="password" path="password" class="form-control"
-                                    placeholder="Password" autofocus="true"></form:input>
-                        <form:errors path="password" cssStyle="color: red"></form:errors>
-                    </div>
-                </spring:bind>
-                <spring:bind path="confirmPassword">
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="password" path="confirmPassword" class="form-control"
-                                    placeholder="Confirm your password"></form:input>
-                        <form:errors path="confirmPassword" cssStyle="color: red"></form:errors>
-                    </div>
-                </spring:bind>
+                <c:choose>
+                    <c:when test="${not empty noChangeMessage}">
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong> ${noChangeMessage}
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <spring:bind path="password">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <form:input type="password" path="password" class="form-control"
+                                            placeholder="Password" autofocus="true"></form:input>
+                                <form:errors path="password" cssStyle="color: red"></form:errors>
+                            </div>
+                        </spring:bind>
+                        <spring:bind path="confirmPassword">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <form:input type="password" path="confirmPassword" class="form-control"
+                                            placeholder="Confirm your password"></form:input>
+                                <form:errors path="confirmPassword" cssStyle="color: red"></form:errors>
+                            </div>
+                        </spring:bind>
+                    </c:otherwise>
+                </c:choose>
 
-                <button type="submit" class="btn btn-info">Change password</button>
+                <c:if test="${empty noChangeMessage}">
+                    <button type="submit" class="btn btn-info">Change password</button>
+                </c:if>
                 <button formaction="/departments" class="btn btn-info">Departments</button>
             </div>
         </div>

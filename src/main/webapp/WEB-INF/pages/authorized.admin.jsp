@@ -49,8 +49,25 @@
     <div class="panel panel-primary">
         <div class="panel-heading">Admin page</div>
         <div class="panel-body">
-            <div class="alert alert-success" role="alert">This is the page for the admin only!
-            </div>
+
+            <c:choose>
+                <c:when test="${not empty ChangedMessage}">
+                    <div class="alert alert-success">${ChangedMessage}
+                    </div>
+                </c:when>
+                <c:when test="${not empty noDeleteMessage}">
+                    <div class="alert alert-warning">${noDeleteMessage}
+                    </div>
+                </c:when>
+                <c:when test="${not empty DeletedMessage}">
+                    <div class="alert alert-success">${DeletedMessage}
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="alert alert-success" role="alert">This is the page for the admin only!
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
             <form:form method="POST" commandName="user" action="/departments">
                 <!-- Table of context -->

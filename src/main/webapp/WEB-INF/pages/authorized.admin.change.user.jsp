@@ -48,26 +48,41 @@
     <!-- Table of context -->
     <form:form action="/authorized/admin/change/user" method="post" modelAttribute="user">
         <div class="panel panel-primary">
-            <div class="panel-heading">Change password for "${user.username}".</div>
+            <div class="panel-heading">&nbsp;</div>
             <div class="panel-body">
-                <div class="alert alert-success" role="alert"></div>
+                <div class="alert alert-success" role="alert">Change password for "${user.username}"</div>
 
-                <spring:bind path="password">
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="password" path="password" class="form-control"
-                                    placeholder="Password" autofocus="true"></form:input>
-                        <form:errors path="password" cssStyle="color: red"></form:errors>
-                    </div>
-                </spring:bind>
-                <spring:bind path="confirmPassword">
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="password" path="confirmPassword" class="form-control"
-                                    placeholder="Confirm your password"></form:input>
-                        <form:errors path="confirmPassword" cssStyle="color: red"></form:errors>
-                    </div>
-                </spring:bind>
+                <c:choose>
+                    <c:when test="${not empty noChangeMessage}">
+                        <div class="alert alert-warning">
+                            <strong>Warning!</strong> ${noChangeMessage}
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <form:input path="username" id="username" readonly="true"
+                                    disabled="true" hidden="true"></form:input>
+                        <form:hidden path="username"/>
 
-                <button type="submit" class="btn btn-info">Change password</button>
+                        <spring:bind path="password">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <form:input type="password" path="password" class="form-control"
+                                            placeholder="Password" autofocus="true"></form:input>
+                                <form:errors path="password" cssStyle="color: red"></form:errors>
+                            </div>
+                        </spring:bind>
+                        <spring:bind path="confirmPassword">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <form:input type="password" path="confirmPassword" class="form-control"
+                                            placeholder="Confirm your password"></form:input>
+                                <form:errors path="confirmPassword" cssStyle="color: red"></form:errors>
+                            </div>
+                        </spring:bind>
+                    </c:otherwise>
+                </c:choose>
+
+                <c:if test="${empty noChangeMessage}">
+                    <button type="submit" class="btn btn-info">Change password</button>
+                </c:if>
                 <button formaction="/authorized/admin" class="btn btn-info">Admin page</button>
             </div>
         </div>

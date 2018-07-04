@@ -279,6 +279,9 @@ public class DepartmentsController {
         User user = new User();
         user.setUsername(userName);
         model.addAttribute("loggedUser", user);
+        if ("user".equals(userName) || "admin".equals(userName)) {
+            model.addAttribute("noChangeMessage", "You can't change the password for admin & user!");
+        }
         return "authorized.user";
     }
 
@@ -324,24 +327,43 @@ public class DepartmentsController {
         user.setPassword("");
         user.setConfirmPassword("");
         model.addAttribute("user", user);
-        model.addAttribute("userName", user.getUsername());
+        String userName = user.getUsername();
 
+        if ("user".equals(userName) || "admin".equals(userName)) {
+            model.addAttribute("noChangeMessage", "You can't change the password for admin & user!");
+        }
         return "authorized.admin.change.user";
     }
 
     @RequestMapping(value = "/authorized/admin/change/user", method = RequestMethod.POST)
-    public String changeUser(@ModelAttribute("user") User user, @ModelAttribute("userName") String userName,
-                             BindingResult bindingResult, Model model) {
+    public String changeUser(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
         passwordValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "authorized.admin.change.user";
         }
-        User editedUser = userService.findByUsername(userName);
+        User editedUser = userService.findByUsername(user.getUsername());
         editedUser.setPassword(user.getConfirmPassword());
         userService.save(editedUser);
 
-        return "authorized.admin";
+        model.addAttribute("ChangedMessage",
+                "Password for " + user.getUsername() + " changed successfully");
+        return "forward:/authorized/admin";
+    }
+
+    @RequestMapping(value = "/authorized/admin/delete/user/{id}", method = RequestMethod.GET)
+    public String removeUser(@PathVariable("id") long id, Model model) {
+        User user = userService.getOne(id);
+        String userName = user.getUsername();
+
+        if ("admin".equals(userName) || "user".equals(userName)) {
+            model.addAttribute("noDeleteMessage", "You can't delete admin & user!");
+            return "forward:/authorized/admin";
+        } else {
+            userService.delete(id);
+            model.addAttribute("DeletedMessage", "User " + userName + " deleted successfully");
+            return "redirect:/authorized/admin";
+        }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -356,7 +378,6 @@ public class DepartmentsController {
                 return "departments";
             }
         }
-
         return "login";
     }
 

@@ -44,6 +44,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void delete(long id) {
+        User user = userDao.getOne(id);
+        userDao.delete(user);
+    }
+
+    @Override
     public User getOne(long id) {
         return userDao.findOne(id);
     }
