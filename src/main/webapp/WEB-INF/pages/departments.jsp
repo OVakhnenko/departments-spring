@@ -14,6 +14,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <meta property="og:url" content="http://app.departments.pp.ua/"/>
+    <meta property="og:image" content="http://vakhnenko.com/spring.png"/>
+
     <title>Departments</title>
 
     <style type="text/css">
